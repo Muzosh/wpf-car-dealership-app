@@ -1,0 +1,29 @@
+﻿sloupce:
+	značka | model | rok výroby | cena bez DPH | typ paliva
+
+
+Atributy auta:
+	kategorie (nový, ojetý, havarované)
+	značka
+	model
+	typ paliva
+	cena
+	rok výroby
+	najeté kilometry
+	typ (sedan, kombi)
+	výkon motoru
+	počet míst
+	převodovka (manuál, automat)
+	výbava (string)
+	popis (string)
+	naposledy aktualizováno
+	přidáno
+
+classes:
+	Car
+	CarList (veskera prace s listem)
+	ImportExportHelper
+okna:
+	mainWindow
+	editWindow
+	importExportWindow
