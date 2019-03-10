@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="AutoBazar" Height="800" Width="1083" ResizeMode="CanMinimize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Icon="beetle-icon-png-28135-Windows.ico" Background="#FFCEE0BF">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>

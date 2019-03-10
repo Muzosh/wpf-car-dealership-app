@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Přidání/Editace" Height="500" Width="676.875"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Background="#FFE5EDDA" Foreground="{x:Null}" Icon="beetle-icon-png-28135-Windows.ico">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="338.43725"/>
