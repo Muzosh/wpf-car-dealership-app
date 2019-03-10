@@ -3,6 +3,7 @@
 
 
 Atributy auta:
+	GUID (nezobrazovat v editaci)
 	kategorie (nový, ojetý, havarované)
 	značka
 	model
@@ -18,11 +19,6 @@ Atributy auta:
 	popis (string)
 	naposledy aktualizováno
 	přidáno
-
-classes:
-	Car
-	CarList (veskera prace s listem)
-	ImportExportHelper
 okna:
 	mainWindow
 	editWindow

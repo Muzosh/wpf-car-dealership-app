@@ -55,7 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Windows\CarEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\CarListWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,8 +67,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Windows\CarEditWindow.xaml.cs">
+      <DependentUpon>CarEditWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Car.cs" />
+    <Compile Include="Classes\CarList.cs" />
+    <Compile Include="Classes\ImportExportHelper.cs" />
+    <Compile Include="Windows\CarListWindow.xaml.cs">
+      <DependentUpon>CarListWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
