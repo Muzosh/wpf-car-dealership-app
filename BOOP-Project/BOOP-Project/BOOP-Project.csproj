@@ -74,6 +74,7 @@
       <DependentUpon>CarEditWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Car.cs" />
+    <Compile Include="Classes\CarForDisplay.cs" />
     <Compile Include="Classes\CarList.cs" />
     <Compile Include="Classes\ImportExportHelper.cs" />
     <Compile Include="CarListWindow.xaml.cs">
@@ -82,6 +83,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\CarCategory.cs" />
+    <Compile Include="Enums\CarType.cs" />
+    <Compile Include="Enums\FuelType.cs" />
+    <Compile Include="Enums\TransmissionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

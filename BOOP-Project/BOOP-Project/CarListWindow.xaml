@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="AutoBazar" Height="800" Width="1083" ResizeMode="CanMinimize"
+        Title="MazirBazi" Height="800" Width="1083" ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen" Icon="beetle-icon-png-28135-Windows.ico" Background="#FFCEE0BF">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -41,73 +41,97 @@
             VerticalAlignment="Center" Width="160" Height="38" FontSize="19" HorizontalContentAlignment="Center"
             FontFamily="Tahoma" Background="#FFDDDDDD" BorderBrush="#FF707070" BorderThickness="1"/>
 
-        <Label x:Name="categoryLabel" Content="Kategorie:" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="1"
+        <Label x:Name="categoryLabel" Content="Kategorie:" Grid.Column="4" HorizontalAlignment="Left" Grid.Row="3"
             VerticalAlignment="Center" Margin="13,0,0,0" FontFamily="Tahoma" FontSize="14"/>
-        <ComboBox x:Name="categoryComboBox" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,13,0" Grid.Row="1"
-            VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand"/>
+        <ComboBox x:Name="categoryComboBox" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,13,0" Grid.Row="3"
+            VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand" SelectionChanged="CategoryComboBox_SelectionChanged"/>
 
         <Label x:Name="typeLabel" Content="Typ:" Grid.Column="4" HorizontalAlignment="Left" Margin="13,0,0,0"
-            Grid.Row="2" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
-        <ComboBox x:Name="typeComboBox" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,13,0" Grid.Row="2"
-            VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand"/>
+            Grid.Row="4" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <ComboBox x:Name="typeComboBox" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,13,0" Grid.Row="4"
+            VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand" SelectionChanged="TypeComboBox_SelectionChanged"/>
 
         <Label x:Name="brandLabel" Content="Značka:" Grid.Column="4" HorizontalAlignment="Left" Margin="13,0,0,0"
-            VerticalAlignment="Center" Grid.Row="3" FontFamily="Tahoma" FontSize="14"/>
-        <ComboBox x:Name="brandComboBox" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,13,0" Grid.Row="3" 
-            VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand"/>
+            VerticalAlignment="Center" Grid.Row="1" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="brandTextBox" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,13,0" Grid.Row="1" 
+            VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand" Height="26" TextChanged="BrandTextBox_TextChanged"/>
 
-        <Label x:Name="modelLabel" Content="Model:" Grid.Column="4" HorizontalAlignment="Left" Margin="13,0,0,0" Grid.Row="4"
+        <Label x:Name="modelLabel" Content="Model:" Grid.Column="4" HorizontalAlignment="Left" Margin="13,0,0,0" Grid.Row="2"
             VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
-        <ComboBox x:Name="modelComboBox" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,13,0" Grid.Row="4"
-            VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand"/>
+        <TextBox x:Name="modelTextBox" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,13,0" Grid.Row="2"
+            VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand" Height="26" TextChanged="ModelTextBox_TextChanged"/>
 
         <Label x:Name="fuelTypeLabel" Content="Palivo:" Grid.Column="4" HorizontalAlignment="Left" Margin="13,0,0,0"
             Grid.Row="5" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <ComboBox x:Name="fuelTypeComboBox" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,13,0"
-            Grid.Row="5" VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand"/>
+            Grid.Row="5" VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand" SelectionChanged="FuelTypeComboBox_SelectionChanged"/>
 
         <Label x:Name="prizeFromLabel" Content="Cena od:" Grid.Column="4" HorizontalAlignment="Left"
             Margin="13,0,0,0" Grid.Row="6" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="prizeFromTextBox" Grid.Column="4" HorizontalAlignment="Left" Height="26" Margin="105,0,0,0"
-            Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" Width="60" FontFamily="Tahoma" FontSize="14"
-            Cursor="Pen"/>
+            Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Center" Width="60" FontFamily="Tahoma" FontSize="14"
+            Cursor="Pen" TextChanged="PrizeFromTextBox_TextChanged"/>
         <Label x:Name="prizeToLabel" Content="do:" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,73,0"
             Grid.Row="6" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="prizeToTextBox" Grid.Column="4" HorizontalAlignment="Right" Height="26" Margin="0,0,13,0"
-            Grid.Row="6" TextWrapping="Wrap" VerticalAlignment="Center" Width="60" FontFamily="Tahoma" FontSize="14"
-            Cursor="Pen"/>
+            Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Center" Width="60" FontFamily="Tahoma" FontSize="14"
+            Cursor="Pen" TextChanged="PrizeToTextBox_TextChanged"/>
 
         <Label x:Name="kilometresFromLabel" Content="Najeto od:" Grid.Column="4" HorizontalAlignment="Left"
             Margin="13,0,0,0" Grid.Row="7" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="kilometresFromTextBox" Grid.Column="4" HorizontalAlignment="Left" Height="26"
-            Margin="105,0,0,0" Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="60"
-            FontFamily="Tahoma" FontSize="14" Cursor="Pen"/>
+            Margin="105,0,0,0" Grid.Row="7" TextWrapping="NoWrap" VerticalAlignment="Center" Width="60"
+            FontFamily="Tahoma" FontSize="14" Cursor="Pen" TextChanged="KilometresFromTextBox_TextChanged"/>
         <Label x:Name="kilometresToLabel" Content="do:" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,73,0"
             Grid.Row="7" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="kilometresToTextBox" Grid.Column="4" HorizontalAlignment="Right" Height="26" Margin="0,0,13,0"
-            Grid.Row="7" TextWrapping="Wrap" VerticalAlignment="Center" Width="60" FontFamily="Tahoma" FontSize="14"
-            Cursor="Pen"/>
+            Grid.Row="7" TextWrapping="NoWrap" VerticalAlignment="Center" Width="60" FontFamily="Tahoma" FontSize="14"
+            Cursor="Pen" TextChanged="KilometresToTextBox_TextChanged"/>
 
         <Label x:Name="modelYearFromLabel" Content="Vyrobeno od:" Grid.Column="4" HorizontalAlignment="Left"
             Margin="13,0,0,0" Grid.Row="8" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="modelYearFromTextBox" Grid.Column="4" HorizontalAlignment="Left" Height="26"
-            Margin="105,0,0,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="60"
-            FontFamily="Tahoma" FontSize="14" Cursor="Pen"/>
+            Margin="105,0,0,0" Grid.Row="8" TextWrapping="NoWrap" VerticalAlignment="Center" Width="60"
+            FontFamily="Tahoma" FontSize="14" Cursor="Pen" TextChanged="ModelYearFromTextBox_TextChanged"/>
         <Label x:Name="modelYearToLabel" Content="do:" Grid.Column="4" HorizontalAlignment="Right"
             Margin="0,0,73,0" Grid.Row="8" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="modelYearToTextBox" Grid.Column="4" HorizontalAlignment="Right" Height="26"
-            Margin="0,0,13,0" Grid.Row="8" TextWrapping="Wrap" VerticalAlignment="Center" Width="60"
-            FontFamily="Tahoma" FontSize="14" Cursor="Pen"/>
+            Margin="0,0,13,0" Grid.Row="8" TextWrapping="NoWrap" VerticalAlignment="Center" Width="60"
+            FontFamily="Tahoma" FontSize="14" Cursor="Pen" TextChanged="ModelYearToTextBox_TextChanged"/>
 
         <Label x:Name="searchStringLabel" Content="Vlastní hledaný text:" Grid.Column="4"
             HorizontalAlignment="Left" Margin="13,0,0,0" Grid.Row="9" VerticalAlignment="Center"
             FontFamily="Tahoma" FontSize="14"/>
-        <TextBox x:Name="searchStringTextBox" Grid.Column="4" HorizontalAlignment="Center" Height="50"
+        <TextBox x:Name="searchStringTextBox" Grid.Column="4" HorizontalAlignment="Center" Height="150"
             Grid.Row="10" TextWrapping="Wrap" VerticalAlignment="Top" Width="215" FontFamily="Tahoma" FontSize="14"
-            Cursor="Pen"/>
+            Cursor="Pen" AcceptsReturn="True" TextChanged="SearchStringTextBox_TextChanged"/>
 
         <DataGrid x:Name="carsDataGrid" VerticalScrollBarVisibility="Visible" HorizontalAlignment="Center"
             Height="685" Grid.Row="1" Grid.RowSpan="10" VerticalAlignment="Top" Width="760" Grid.Column="0"
-            Grid.ColumnSpan="4" BorderBrush="#FFC7C7C7" BorderThickness="2" Margin="0,0,0,0"/>
+            Grid.ColumnSpan="4" BorderBrush="#FFC7C7C7" BorderThickness="2" Margin="0,0,0,0" AutoGenerateColumns="False"
+            IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Značka" Binding="{Binding Brand}" Width="120" CanUserResize="False" CanUserReorder="False"/>
+                <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="313" CanUserResize="False" CanUserReorder="False"/>
+                <DataGridTextColumn Header="Rok výroby" Width="80" Binding="{Binding ModelYear}"
+                                    CanUserResize="False" CanUserReorder="False">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Cena bez DPH" Width="100" Binding="{Binding Prize, StringFormat={}{0:F2}}"
+                                    CanUserResize="False" CanUserReorder="False">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style>
+                            <Setter Property="TextBlock.TextAlignment" Value="Right" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Přidáno" Width="120" Binding="{Binding Added, StringFormat={}{0:dd/MM/yyyy hh:mm:ss}}"
+                                    CanUserResize="False" CanUserReorder="False"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

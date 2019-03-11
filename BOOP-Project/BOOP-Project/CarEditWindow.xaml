@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Přidání/Editace" Height="500" Width="676.875"
-        WindowStartupLocation="CenterScreen" Background="#FFE5EDDA" Foreground="{x:Null}" Icon="beetle-icon-png-28135-Windows.ico">
+        WindowStartupLocation="CenterScreen" Background="#FFE5EDDA" Foreground="{x:Null}"
+        Icon="beetle-icon-png-28135-Windows.ico"
+        ResizeMode="CanMinimize">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="338.43725"/>
-            <ColumnDefinition Width="338.43725"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -18,88 +20,99 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Label Content="Kategorie" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="categoryLabel" Content="Kategorie" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" FontFamily="Tahoma" HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Center"/>
-        <ComboBox HorizontalAlignment="Left" Margin="160,27,0,0" VerticalAlignment="Top" Width="132" 
-                  FontFamily="Tahoma" Cursor="Pen"/>
+               VerticalContentAlignment="Center" FontSize="14"/>
+        <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
+                  FontFamily="Tahoma" Cursor="Pen" FontSize="14"/>
 
-        <Label Content="Značka" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="brandLabel" Content="Značka" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="1" HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Center" FontFamily="Tahoma"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="160,26,0,0" Grid.Row="1" 
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132" FontFamily="Tahoma" Cursor="Pen"/>
+               VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="brandTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="1" 
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma"
+                 FontSize="14" Cursor="Pen"/>
 
-        <Label Content="Model" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="modelLabel" Content="Model" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="2" HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Center" FontFamily="Tahoma"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="160,26,0,0" Grid.Row="2" 
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132" FontFamily="Tahoma" Cursor="Pen"/>
+               VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="modeTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="2" 
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
+                 FontSize="14"/>
 
-        <Label Content="Typ paliva" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="fuelTypeLabel" Content="Typ paliva" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="3" HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Center" FontFamily="Tahoma"/>
-        <ComboBox HorizontalAlignment="Left" Margin="160,27,0,0" VerticalAlignment="Top" Width="132" 
-                  Grid.Row="3" FontFamily="Tahoma" Cursor="Pen"/>
+               VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <ComboBox x:Name="fuelTypeComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
+                  Grid.Row="3" FontFamily="Tahoma" Cursor="Pen" FontSize="14"/>
 
-        <Label Content="Cena" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="prizeLabel" Content="Cena" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="4" HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Center" FontFamily="Tahoma"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="160,26,0,0" Grid.Row="4" 
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132" FontFamily="Tahoma" Cursor="Pen"/>
+               VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="prizeTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="4" 
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
+                 FontSize="14"/>
 
-        <Label Content="Rok výroby" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="yearLabel" Content="Rok výroby" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="5" HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Center" FontFamily="Tahoma"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="160,26,0,0" Grid.Row="5" 
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132" FontFamily="Tahoma" Cursor="Pen"/>
+               VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="yearTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="5" 
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
+                 FontSize="14"/>
 
-        <Label Content="Najeté km" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="kilometresLabel" Content="Najeté km" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Center" FontFamily="Tahoma"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="160,26,0,0" Grid.Column="1" Grid.Row="0" 
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132" FontFamily="Tahoma" Cursor="Pen"/>
+               VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="kilometresTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Column="1" Grid.Row="0" 
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
+                 FontSize="14"/>
 
-        <Label Content="Typ" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="typeLabel" Content="Typ" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Center" FontFamily="Tahoma"/>
-        <ComboBox HorizontalAlignment="Left" Margin="160,27,0,0" VerticalAlignment="Top" Width="132" 
-                  Grid.Column="1" Grid.Row="1" FontFamily="Tahoma" Cursor="Pen"/>
+               VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
+                  Grid.Column="1" Grid.Row="1" FontFamily="Tahoma" Cursor="Pen" FontSize="14"/>
 
-        <Label Content="Výkon motoru" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="powerLavel" Content="Výkon" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" 
-               HorizontalContentAlignment="Center" FontFamily="Tahoma"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="160,26,0,0" Grid.Column="1" Grid.Row="2" 
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132" FontFamily="Tahoma" Cursor="Pen"/>
+               HorizontalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="powerTextbox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Column="1" Grid.Row="2" 
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
+                 FontSize="14"/>
 
-        <Label Content="Počet míst" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="seatCountLabel" Content="Počet míst" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" 
-               HorizontalContentAlignment="Center" FontFamily="Tahoma"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="160,26,0,0" Grid.Column="1" Grid.Row="3" 
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="132" FontFamily="Tahoma" Cursor="Pen"/>
+               HorizontalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="seatCountTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Column="1" Grid.Row="3" 
+                 TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
+                 FontSize="14"/>
 
-        <Label Content="Převodovka" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="transmissionLabel" Content="Převodovka" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" 
-               HorizontalContentAlignment="Center" FontFamily="Tahoma"/>
-        <ComboBox HorizontalAlignment="Left" Margin="160,27,0,0" VerticalAlignment="Top" Width="132" 
-                  Grid.Column="1" Grid.Row="4" FontFamily="Tahoma" Cursor="Pen"/>
+               HorizontalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <ComboBox x:Name="transmissionComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
+                  Grid.Column="1" Grid.Row="4" FontFamily="Tahoma" Cursor="Pen" FontSize="14"/>
 
-        <Label Content="Výbava" HorizontalAlignment="Left" Margin="23,10,0,0" VerticalAlignment="Center" 
+        <Label x:Name="featuresLabel" Content="Výbava" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="5" VerticalContentAlignment="Center" 
-               HorizontalContentAlignment="Center" FontFamily="Tahoma"/>
-        <TextBox HorizontalAlignment="Left" Height="50" Margin="137.563,5,0,0" Grid.Column="1" Grid.Row="5" 
-                 TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="166" FontFamily="Tahoma" Cursor="Pen"/>
+               HorizontalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="featuresTextBox" HorizontalAlignment="Left" Height="50" Margin="126,0,0,0" Grid.Column="1" Grid.Row="5" 
+                 TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="166" FontFamily="Tahoma" Cursor="Pen"
+                  FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True"/>
 
-        <Label Content="Popis" HorizontalAlignment="Left" Margin="18,21,0,49.667" VerticalAlignment="Center" 
+        <Label x:Name="dedscriptionLabel" Content="Popis" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="6" HorizontalContentAlignment="Center" 
-               VerticalContentAlignment="Center" FontFamily="Tahoma"/>
-        <TextBox HorizontalAlignment="Left" Height="53" Margin="108,10,0,0" Grid.Row="6" TextWrapping="Wrap" 
-                 Text="" VerticalAlignment="Top" Width="510" Grid.ColumnSpan="2" FontFamily="Tahoma" Cursor="Pen"/>
+               VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
+        <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="53" Margin="121,0,0,0" Grid.Row="6" TextWrapping="Wrap" 
+                 Text="" VerticalAlignment="Center" Width="510" Grid.ColumnSpan="2" FontFamily="Tahoma" Cursor="Pen"
+                 FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True"/>
 
-        <Button Grid.ColumnSpan="2" Content="OK" HorizontalAlignment="Left" Margin="303,68,0,0" 
-                Grid.Row="6" VerticalAlignment="Top" Width="75" Height="24"/>
-
+        <Button x:Name="saveCarButton" Content="Uložit" HorizontalAlignment="Right" Margin="0,0,23,0" 
+                Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30"/>
+        <Button x:Name="cancelButton" Content="Zrušit" HorizontalAlignment="Left" Margin="23,0,0,0" 
+                Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30" Grid.Column="1"/>
     </Grid>
 </Window>

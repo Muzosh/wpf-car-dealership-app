@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace BOOP_Project
 {
-    class CarList
+    public static class CarList
     {
-        public List<Car> Cars { get; private set; }
+        public static List<Car> carList = new List<Car>();
+
+        public static List<Car> filteredCarList = new List<Car>();
     }
 }
