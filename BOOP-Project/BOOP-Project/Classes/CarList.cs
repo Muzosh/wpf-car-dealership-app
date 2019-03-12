@@ -16,19 +16,20 @@ namespace BOOP_Project
 
         public static ActiveFilter activeFilter = new ActiveFilter();
 
-        public static void UpdateActiveFilterAndApply(
+        public static void UpdateActiveFilter(
             string brand,
             string model,
             CarCategory? carCategory,
             CarType? carType,
             FuelType? fuelType,
-            double? prizeFrom,
-            double? prizeTo,
-            double? kilometresFrom,
-            double? kilometresTo,
+            int? prizeFrom,
+            int? prizeTo,
+            int? kilometresFrom,
+            int? kilometresTo,
             int? modelYearFrom,
             int? modelYearTo)
         {
+            // Update filters
             activeFilter.Brand = brand;
             activeFilter.Model = model;
             activeFilter.CarCategory = carCategory;
@@ -40,10 +41,90 @@ namespace BOOP_Project
             activeFilter.KilometresTo = kilometresTo;
             activeFilter.ModelYearFrom = modelYearFrom;
             activeFilter.ModelYearTo = modelYearTo;
+        }
 
-            filteredCarList = fullCarList.Where(x =>
-                x.Brand.ToLower().Contains(activeFilter.Brand.ToLower())).ToList();
-            // ... nedokonceno
+        public static void ApplyActiveFilter()
+        {
+            filteredCarList = fullCarList.Cast<Car>().ToList();
+
+            if (!string.IsNullOrEmpty(activeFilter.Brand))
+            {
+                filteredCarList = filteredCarList
+                    .Where(x =>
+                        !string.IsNullOrEmpty(x.Brand) &&
+                        x.Brand.ToLower().Contains(activeFilter.Brand.ToLower()))
+                    .ToList();
+            }
+
+            if (!string.IsNullOrEmpty(activeFilter.Model))
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.Model.ToLower().Contains(activeFilter.Model.ToLower()))
+                    .ToList();
+            }
+
+            if (activeFilter.CarCategory.HasValue)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.CarCategory == activeFilter.CarCategory.Value)
+                    .ToList();
+            }
+
+            if (activeFilter.CarType.HasValue)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.CarType == activeFilter.CarType.Value)
+                    .ToList();
+            }
+
+            if (activeFilter.FuelType.HasValue)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.FuelType == activeFilter.FuelType.Value)
+                    .ToList();
+            }
+
+            if(activeFilter.PrizeFrom != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.Prize >= activeFilter.PrizeFrom)
+                    .ToList();
+            }
+
+            if (activeFilter.PrizeTo != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.Prize <= activeFilter.PrizeFrom)
+                    .ToList();
+            }
+
+            if (activeFilter.KilometresFrom != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.Kilometres >= activeFilter.KilometresFrom)
+                    .ToList();
+            }
+
+            if (activeFilter.KilometresTo != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.Kilometres <= activeFilter.KilometresTo)
+                    .ToList();
+            }
+
+            if (activeFilter.ModelYearFrom != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.ModelYear >= activeFilter.ModelYearFrom)
+                    .ToList();
+            }
+
+            if (activeFilter.ModelYearTo != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.ModelYear <= activeFilter.ModelYearTo)
+                    .ToList();
+            }
         }
     }
 }

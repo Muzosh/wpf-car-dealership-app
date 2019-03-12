@@ -1,8 +1,11 @@
 ﻿using BOOP_Project.Enums;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace BOOP_Project
 {
@@ -16,13 +19,15 @@ namespace BOOP_Project
             InitializeComponent();
 
             // dočasné, pro kontrolu
-            CarList.loadedCarList.Add(new Car());
-            CarList.loadedCarList[0].Brand = "Tesla";
-            CarList.loadedCarList[0].Model = "Model S";
-            CarList.loadedCarList.Add(new Car());
-            CarList.loadedCarList[1].Brand = "BMW";
-            CarList.loadedCarList[1].Model = "M3";
-            this.carsDataGrid.ItemsSource = CarList.loadedCarList;
+            CarList.fullCarList.Add(new Car());
+            CarList.fullCarList[0].Brand = "Tesla";
+            CarList.fullCarList[0].Model = "Model S";
+            CarList.fullCarList.Add(new Car());
+            CarList.fullCarList[1].Brand = "BMW";
+            CarList.fullCarList[1].Model = "M3";
+
+            CarList.filteredCarList = CarList.fullCarList.Cast<Car>().ToList();
+            this.carsDataGrid.ItemsSource = CarList.filteredCarList;
         }
 
         // Event handlers
@@ -58,14 +63,21 @@ namespace BOOP_Project
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
             // pro kontrolu
-            CarList.loadedCarList[0].Model = "zmeneno";
+            CarList.filteredCarList[0].Model = "zmeneno";
+            CarList.filteredCarList.Add(new Car());
             this.categoryComboBox.ItemsSource = Enum.GetValues(typeof(CarCategory)).Cast<CarCategory>();
             this.RefreshCarsDataGrid();
         }
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            this.searchStringTextBox.Text = CarList.activeFilter.CarCategory.ToString();
+            this.searchStringTextBox.Text = CarList.activeFilter.PrizeFrom.ToString();
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         #region Filter event handlers
@@ -131,62 +143,62 @@ namespace BOOP_Project
         #endregion
 
         #region Nulling filter event handlers
-        private void CategoryComboBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void CategoryComboBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.categoryComboBox.SelectedIndex = -1;
         }
 
-        private void TypeComboBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void TypeComboBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.typeComboBox.SelectedIndex = -1;
         }
 
-        private void FuelTypeComboBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void FuelTypeComboBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.fuelTypeComboBox.SelectedIndex = -1;
         }
 
-        private void BrandTextBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void BrandTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.brandTextBox.Text = null;
         }
 
-        private void ModelTextBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ModelTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.modelTextBox.Text = null;
         }
 
-        private void PrizeFromTextBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void PrizeFromTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.prizeFromTextBox.Text = null;
         }
 
-        private void PrizeToTextBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void PrizeToTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.prizeToTextBox.Text = null;
         }
 
-        private void KilometresFromTextBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void KilometresFromTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.kilometresFromTextBox.Text = null;
         }
 
-        private void KilometresToTextBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void KilometresToTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.kilometresToTextBox.Text = null;
         }
 
-        private void ModelYearFromTextBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ModelYearFromTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.modelYearFromTextBox.Text = null;
         }
 
-        private void ModelYearToTextBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ModelYearToTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.modelYearToTextBox.Text = null;
         }
 
-        private void SearchStringTextBox_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void SearchStringTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.searchStringTextBox.Text = null;
         }
@@ -200,18 +212,56 @@ namespace BOOP_Project
 
         private void RefreshCarsDataGrid()
         {
-            this.carsDataGrid.Items.Refresh();
+            this.carsDataGrid.ItemsSource = CarList.filteredCarList;
         }
 
         private void UpdateAndApplyFilters()
         {
-            CarList.UpdateActiveFilterAndApply();
+            CarList.UpdateActiveFilter(
+                this.brandTextBox.Text,
+                this.modelTextBox.Text,
+                (CarCategory?)this.categoryComboBox.SelectedItem,
+                (CarType?)this.typeComboBox.SelectedItem,
+                (FuelType?)this.fuelTypeComboBox.SelectedItem,
+                int.TryParse(this.prizeFromTextBox.Text, out int result1) ? result1 : (int?)null,
+                int.TryParse(this.prizeToTextBox.Text, out int result2) ? result2 : (int?)null,
+                int.TryParse(this.kilometresFromTextBox.Text, out int result3) ? result3 : (int?)null,
+                int.TryParse(this.kilometresToTextBox.Text, out int result4) ? result4 : (int?)null,
+                int.TryParse(this.modelYearFromTextBox.Text, out int result5) ? result5 : (int?)null,
+                int.TryParse(this.modelYearToTextBox.Text, out int result6) ? result6 : (int?)null);
+
+            CarList.ApplyActiveFilter();
+            this.RefreshCarsDataGrid();
         }
 
         private void OpenCarEditWindow(Guid? carID)
         {
             CarEditWindow carEditWindow = new CarEditWindow(carID);
             carEditWindow.ShowDialog();
+        }
+
+        private double? TryParseDouble(TextBox textBox)
+        {
+            if(double.TryParse(textBox.Text, out double result))
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private int? TryParseInt(TextBox textBox)
+        {
+            if (int.TryParse(textBox.Text, out int result))
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
