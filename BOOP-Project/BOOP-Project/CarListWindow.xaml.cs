@@ -14,11 +14,20 @@ namespace BOOP_Project
     /// </summary>
     public partial class CarListWindow : Window
     {
+        //private CarList carList = new CarList();
         public CarListWindow()
         {
             InitializeComponent();
+            this.carsDataGrid.ItemsSource = CarList.filteredCarList;
+            this.categoryComboBox.ItemsSource = Enum.GetValues(typeof(CarCategory)).Cast<CarCategory>();
+            this.typeComboBox.ItemsSource = Enum.GetValues(typeof(CarType)).Cast<CarType>();
+            this.fuelTypeComboBox.ItemsSource = Enum.GetValues(typeof(FuelType)).Cast<FuelType>();
+        }
 
-            // dočasné, pro kontrolu
+        // Event handlers
+        private void AddCarButton_Click(object sender, RoutedEventArgs e)
+        {
+            //this.OpenCarEditWindow(null);
             CarList.fullCarList.Add(new Car());
             CarList.fullCarList[0].Brand = "Tesla";
             CarList.fullCarList[0].Model = "Model S";
@@ -26,21 +35,14 @@ namespace BOOP_Project
             CarList.fullCarList[1].Brand = "BMW";
             CarList.fullCarList[1].Model = "M3";
 
-            CarList.filteredCarList = CarList.fullCarList.Cast<Car>().ToList();
-            this.carsDataGrid.ItemsSource = CarList.filteredCarList;
-        }
-
-        // Event handlers
-        private void AddCarButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.OpenCarEditWindow(null);
-            this.RefreshGui();
+            
+            this.UpdateAndApplyFilters();
+            this.RefreshCarsDataGrid();
         }
 
         private void EditCarButton_Click(object sender, RoutedEventArgs e)
         {
             Guid? carID;
-
             try
             {
                 carID = ((Car)this.carsDataGrid.SelectedItem).Guid;
@@ -58,20 +60,21 @@ namespace BOOP_Project
             this.OpenCarEditWindow(carID.Value);
 
             this.carsDataGrid.SelectedItem = null;
+            this.UpdateAndApplyFilters();
+            this.RefreshCarsDataGrid();
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            // pro kontrolu
-            CarList.filteredCarList[0].Model = "zmeneno";
-            CarList.filteredCarList.Add(new Car());
-            this.categoryComboBox.ItemsSource = Enum.GetValues(typeof(CarCategory)).Cast<CarCategory>();
+
+            this.UpdateAndApplyFilters();
             this.RefreshCarsDataGrid();
         }
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            this.searchStringTextBox.Text = CarList.activeFilter.PrizeFrom.ToString();
+            this.UpdateAndApplyFilters();
+            this.RefreshCarsDataGrid();
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -205,11 +208,6 @@ namespace BOOP_Project
         #endregion
 
         // Helpers
-        private void RefreshGui()
-        {
-
-        }
-
         private void RefreshCarsDataGrid()
         {
             this.carsDataGrid.ItemsSource = CarList.filteredCarList;
@@ -228,7 +226,8 @@ namespace BOOP_Project
                 int.TryParse(this.kilometresFromTextBox.Text, out int result3) ? result3 : (int?)null,
                 int.TryParse(this.kilometresToTextBox.Text, out int result4) ? result4 : (int?)null,
                 int.TryParse(this.modelYearFromTextBox.Text, out int result5) ? result5 : (int?)null,
-                int.TryParse(this.modelYearToTextBox.Text, out int result6) ? result6 : (int?)null);
+                int.TryParse(this.modelYearToTextBox.Text, out int result6) ? result6 : (int?)null,
+                this.searchStringTextBox.Text);
 
             CarList.ApplyActiveFilter();
             this.RefreshCarsDataGrid();
@@ -238,30 +237,6 @@ namespace BOOP_Project
         {
             CarEditWindow carEditWindow = new CarEditWindow(carID);
             carEditWindow.ShowDialog();
-        }
-
-        private double? TryParseDouble(TextBox textBox)
-        {
-            if(double.TryParse(textBox.Text, out double result))
-            {
-                return result;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        private int? TryParseInt(TextBox textBox)
-        {
-            if (int.TryParse(textBox.Text, out int result))
-            {
-                return result;
-            }
-            else
-            {
-                return null;
-            }
         }
     }
 }

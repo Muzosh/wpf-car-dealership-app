@@ -20,5 +20,6 @@ namespace BOOP_Project.Classes
         public int? KilometresTo { get; set; }
         public int? ModelYearFrom { get; set; }
         public int? ModelYearTo { get; set; }
+        public List<string> searchStrings { get; set; }
     }
 }

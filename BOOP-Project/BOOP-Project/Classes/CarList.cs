@@ -16,6 +16,13 @@ namespace BOOP_Project
 
         public static ActiveFilter activeFilter = new ActiveFilter();
 
+        /*public static CarList()
+        {
+            fullCarList = new List<Car>();
+            filteredCarList = new List<Car>();
+            activeFilter = new ActiveFilter();
+        }*/
+
         public static void UpdateActiveFilter(
             string brand,
             string model,
@@ -27,7 +34,8 @@ namespace BOOP_Project
             int? kilometresFrom,
             int? kilometresTo,
             int? modelYearFrom,
-            int? modelYearTo)
+            int? modelYearTo,
+            string searchString)
         {
             // Update filters
             activeFilter.Brand = brand;
@@ -41,6 +49,7 @@ namespace BOOP_Project
             activeFilter.KilometresTo = kilometresTo;
             activeFilter.ModelYearFrom = modelYearFrom;
             activeFilter.ModelYearTo = modelYearTo;
+            activeFilter.searchStrings = searchString.Split(',', ' ', ';', '.').ToList();
         }
 
         public static void ApplyActiveFilter()
@@ -125,6 +134,8 @@ namespace BOOP_Project
                     .Where(x => x.ModelYear <= activeFilter.ModelYearTo)
                     .ToList();
             }
+
+
         }
     }
 }

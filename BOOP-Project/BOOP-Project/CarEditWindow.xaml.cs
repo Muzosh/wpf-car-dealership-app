@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BOOP_Project.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,9 @@ namespace BOOP_Project
         public CarEditWindow(Guid? carID)
         {
             InitializeComponent();
+            this.categoryComboBox.ItemsSource = Enum.GetValues(typeof(CarCategory)).Cast<CarCategory>();
+            this.typeComboBox.ItemsSource = Enum.GetValues(typeof(CarType)).Cast<CarType>();
+            this.fuelTypeComboBox.ItemsSource = Enum.GetValues(typeof(FuelType)).Cast<FuelType>(); InitializeComponent();
         }
     }
 }
