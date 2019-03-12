@@ -73,8 +73,8 @@
     <Compile Include="CarEditWindow.xaml.cs">
       <DependentUpon>CarEditWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\ActiveFilter.cs" />
     <Compile Include="Classes\Car.cs" />
-    <Compile Include="Classes\CarForDisplay.cs" />
     <Compile Include="Classes\CarList.cs" />
     <Compile Include="Classes\ImportExportHelper.cs" />
     <Compile Include="CarListWindow.xaml.cs">
