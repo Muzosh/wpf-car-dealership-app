@@ -23,3 +23,90 @@ okna:
 	mainWindow
 	editWindow
 	importExportWindow
+
+
+CSV ukládání pro inspiraci:
+
+else if (e.ItemName == "Csv")
+{
+    this.ShowLoadingScreen();
+
+    DateTime reportFromDateTime = (DateTime)this.dateTimeFromDateEdit.EditValue;
+    DateTime reportToDateTime = (DateTime)this.dateTimeToDateEdit.EditValue;
+
+    if (reportFromDateTime > reportToDateTime)
+    {
+        MessageBox.Show(
+            LangResource.TheDateOfBeginningCannotBeLaterThanTheDateOfTheEnd,
+            LangResource.DataValidation,
+            MessageBoxButton.OK,
+            MessageBoxImage.Error);
+        this.HideLoadingScreen();
+        return;
+    }
+
+    SaveFileDialog saveFileDialog = new SaveFileDialog();
+    saveFileDialog.DefaultExt = ".csv";
+    saveFileDialog.Filter =
+        LangResource.CsvFiles + " (*.csv)|*.csv|" + LangResource.AllFiles + " (*.*)|*.*";
+
+    if (saveFileDialog.ShowDialog() == true)
+    {
+        bool saved = false;
+        try
+        {
+            using (StreamWriter sw =
+                new StreamWriter(File.Open(saveFileDialog.FileName, FileMode.Create), Encoding.UTF8))
+            {
+                SoldAssortmentReportReadOnly soldAssortmentReportReadOnly =
+                    await SoldAssortmentReportReadOnly.GetAsync(reportFromDateTime, reportToDateTime);
+
+                sw.WriteLine("Typ;Datum a čas;Název položky;PC bez DPH;Množství;Celkem");
+                foreach (SoldAssortmentReportItemReadOnly item in soldAssortmentReportReadOnly
+                    .SaleItems.OrderBy(x => x.SellingDateTime))
+                {
+                    sw.WriteLine(
+                        "\"Prodej" + "\";\"" +
+                        item.SellingDateTime + "\";\"" +
+                        item.TradeName + "\";\"" +
+                        item.SellingPrice + "\";\"" +
+                        item.Quantity + "\";\"" +
+                        item.ItemTurnover + "\"");
+                }
+
+                foreach (SoldAssortmentReportItemReadOnly item in soldAssortmentReportReadOnly
+                    .SaleNoteItems.OrderBy(x => x.SellingDateTime))
+                {
+                    sw.WriteLine(
+                        "\"Dodací list" + "\";\"" +
+                        item.SellingDateTime + "\";\"" +
+                        item.TradeName + "\";\"" +
+                        item.SellingPrice + "\";\"" +
+                        item.Quantity + "\";\"" +
+                        item.ItemTurnover + "\"");
+                }
+            }
+
+            saved = true;
+        }
+        catch
+        {
+            MessageBox.Show(
+                LangResource.ReportExportUnsuccessfull,
+                LangResource.ReportExport,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
+
+        if (saved)
+        {
+            MessageBox.Show(
+                LangResource.ReportExportSuccessfull,
+                LangResource.ReportExport,
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
+    }
+
+    this.HideLoadingScreen();
+}
