@@ -1,6 +1,5 @@
 ﻿using BOOP_Project.Enums;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -14,7 +13,8 @@ namespace BOOP_Project
     /// </summary>
     public partial class CarListWindow : Window
     {
-        //private CarList carList = new CarList();
+        // TODO: Ke konci možná spojit metody ApplyAndUpdateFilters a RefreshCarsDataGrid dohromady a udělat 
+        // filteredCarList private
         public CarListWindow()
         {
             InitializeComponent();
@@ -31,11 +31,28 @@ namespace BOOP_Project
             CarList.fullCarList.Add(new Car());
             CarList.fullCarList[0].Brand = "Tesla";
             CarList.fullCarList[0].Model = "Model S";
+            CarList.fullCarList[0].CarCategory = CarCategory.Havarované;
+            CarList.fullCarList[0].CarType = CarType.Kombi;
+            CarList.fullCarList[0].FuelType = FuelType.Elektro;
+            CarList.fullCarList[0].TransmissionType = TransmissionType.Automat;
+            CarList.fullCarList[0].Kilometres = 25;
+            CarList.fullCarList[0].Power = 25.5;
+            CarList.fullCarList[0].Prize = 25.5;
+            CarList.fullCarList[0].ModelYear = 1997;
+            CarList.fullCarList[0].SeatCount = 6;
             CarList.fullCarList.Add(new Car());
             CarList.fullCarList[1].Brand = "BMW";
             CarList.fullCarList[1].Model = "M3";
+            CarList.fullCarList[1].CarCategory = CarCategory.Ostatní;
+            CarList.fullCarList[1].CarType = CarType.Terenní;
+            CarList.fullCarList[1].FuelType = FuelType.Nafta;
+            CarList.fullCarList[1].TransmissionType = TransmissionType.Manuál;
+            CarList.fullCarList[1].Kilometres = 34;
+            CarList.fullCarList[1].Power = 34.4;
+            CarList.fullCarList[1].Prize = 34.4;
+            CarList.fullCarList[1].ModelYear = 2008;
+            CarList.fullCarList[1].SeatCount = 2;
 
-            
             this.UpdateAndApplyFilters();
             this.RefreshCarsDataGrid();
         }
@@ -45,7 +62,31 @@ namespace BOOP_Project
             Guid? carID;
             try
             {
-                carID = ((Car)this.carsDataGrid.SelectedItem).Guid;
+                carID = ((Car)this.carsDataGrid.SelectedItem).carID;
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show(
+                    "Není vybrána žádná položka",
+                    "Editovat položku",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+                return;
+            }
+
+            this.OpenCarEditWindow(carID.Value);
+
+            this.carsDataGrid.SelectedItem = null;
+            this.UpdateAndApplyFilters();
+            this.RefreshCarsDataGrid();
+        }
+
+        private void CarsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Guid? carID;
+            try
+            {
+                carID = ((Car)this.carsDataGrid.SelectedItem).carID;
             }
             catch (NullReferenceException)
             {
@@ -66,44 +107,15 @@ namespace BOOP_Project
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            // Configure open file dialog box
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            // dlg.FileName = "Document"; // Default file name
-            dlg.DefaultExt = ".txt"; // Default file extension
-            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+            this.ImportToCsv();
 
-            // Show open file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Process open file dialog box results
-            if (result == true)
-            {
-                // Open document
-                string filename = dlg.FileName;
-            }
             this.UpdateAndApplyFilters();
             this.RefreshCarsDataGrid();
         }
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            // Configure save file dialog box
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "Document"; // Default file name
-            dlg.DefaultExt = ".txt"; // Default file extension
-            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
-
-            // Show save file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Process save file dialog box results
-            if (result == true)
-            {
-                // Save document
-                string filename = dlg.FileName;
-            }
-            this.UpdateAndApplyFilters();
-            this.RefreshCarsDataGrid();
+            this.ExportToCsv();
         }
 
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -175,62 +187,62 @@ namespace BOOP_Project
         #endregion
 
         #region Nulling filter event handlers
-        private void CategoryComboBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void CategoryComboBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.categoryComboBox.SelectedIndex = -1;
         }
 
-        private void TypeComboBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void TypeComboBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.typeComboBox.SelectedIndex = -1;
         }
 
-        private void FuelTypeComboBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void FuelTypeComboBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.fuelTypeComboBox.SelectedIndex = -1;
         }
 
-        private void BrandTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void BrandTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.brandTextBox.Text = null;
         }
 
-        private void ModelTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ModelTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.modelTextBox.Text = null;
         }
 
-        private void PrizeFromTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void PrizeFromTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.prizeFromTextBox.Text = null;
         }
 
-        private void PrizeToTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void PrizeToTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.prizeToTextBox.Text = null;
         }
 
-        private void KilometresFromTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void KilometresFromTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.kilometresFromTextBox.Text = null;
         }
 
-        private void KilometresToTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void KilometresToTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.kilometresToTextBox.Text = null;
         }
 
-        private void ModelYearFromTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ModelYearFromTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.modelYearFromTextBox.Text = null;
         }
 
-        private void ModelYearToTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ModelYearToTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.modelYearToTextBox.Text = null;
         }
 
-        private void SearchStringTextBox_PreviewMouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void SearchStringTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.searchStringTextBox.Text = null;
         }
@@ -266,6 +278,44 @@ namespace BOOP_Project
         {
             CarEditWindow carEditWindow = new CarEditWindow(carID);
             carEditWindow.ShowDialog();
+        }
+
+        private void ImportToCsv()
+        {
+            // Configure open file dialog box
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            // dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".txt"; // Default file extension
+            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show open file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process open file dialog box results
+            if (result == true)
+            {
+                // Open document
+                string filename = dlg.FileName;
+            }
+        }
+
+        private void ExportToCsv()
+        {
+            // Configure save file dialog box
+            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
+            dlg.FileName = "Document"; // Default file name
+            dlg.DefaultExt = ".txt"; // Default file extension
+            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
+
+            // Show save file dialog box
+            Nullable<bool> result = dlg.ShowDialog();
+
+            // Process save file dialog box results
+            if (result == true)
+            {
+                // Save document
+                string filename = dlg.FileName;
+            }
         }
     }
 }

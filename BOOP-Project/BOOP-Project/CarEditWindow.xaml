@@ -111,8 +111,8 @@
                  FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True"/>
 
         <Button x:Name="saveCarButton" Content="Uložit" HorizontalAlignment="Right" Margin="0,0,23,0" 
-                Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30"/>
+                Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30" Click="SaveCarButton_Click"/>
         <Button x:Name="cancelButton" Content="Zrušit" HorizontalAlignment="Left" Margin="23,0,0,0" 
-                Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30" Grid.Column="1"/>
+                Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30" Grid.Column="1" Click="CancelButton_Click"/>
     </Grid>
 </Window>

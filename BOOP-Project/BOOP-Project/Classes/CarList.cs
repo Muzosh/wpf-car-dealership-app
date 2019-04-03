@@ -14,14 +14,7 @@ namespace BOOP_Project
 
         public static List<Car> filteredCarList = new List<Car>();
 
-        public static ActiveFilter activeFilter = new ActiveFilter();
-
-        /*public static CarList()
-        {
-            fullCarList = new List<Car>();
-            filteredCarList = new List<Car>();
-            activeFilter = new ActiveFilter();
-        }*/
+        private static ActiveFilter activeFilter = new ActiveFilter();
 
         public static void UpdateActiveFilter(
             string brand,
@@ -59,9 +52,7 @@ namespace BOOP_Project
             if (!string.IsNullOrEmpty(activeFilter.Brand))
             {
                 filteredCarList = filteredCarList
-                    .Where(x =>
-                        !string.IsNullOrEmpty(x.Brand) &&
-                        x.Brand.ToLower().Contains(activeFilter.Brand.ToLower()))
+                    .Where(x => x.Brand.ToLower().Contains(activeFilter.Brand.ToLower()))
                     .ToList();
             }
 
@@ -135,7 +126,30 @@ namespace BOOP_Project
                     .ToList();
             }
 
-
+            if (activeFilter.searchStrings.Any(x => x != string.Empty))
+            {
+                foreach (string searchString in activeFilter.searchStrings)
+                {
+                    filteredCarList = filteredCarList
+                        .Where(x =>
+                            x.Brand.ToLower().Contains(searchString.ToLower()) ||
+                            x.Model.ToLower().Contains(searchString.ToLower()) ||
+                            x.CarCategory.ToString().ToLower().Contains(searchString.ToLower()) ||
+                            x.CarType.ToString().ToLower().Contains(searchString.ToLower()) ||
+                            x.FuelType.ToString().ToLower().Contains(searchString.ToLower()) ||
+                            x.TransmissionType.ToString().ToLower().Contains(searchString.ToLower()) ||
+                            x.Prize.ToString().ToLower().Contains(searchString.ToLower()) ||
+                            x.Kilometres.ToString().ToLower().Contains(searchString.ToLower()) ||
+                            x.ModelYear.ToString().ToLower().Contains(searchString.ToLower()) ||
+                            (!string.IsNullOrEmpty(x.CarDescription) &&
+                                x.CarDescription.ToLower().Contains(searchString.ToLower())) ||
+                            (!string.IsNullOrEmpty(x.CarFeatures) &&
+                                x.CarFeatures.ToLower().Contains(searchString.ToLower())) ||
+                            x.Power.ToString().ToLower().Contains(searchString.ToLower()) ||
+                            x.SeatCount.ToString().ToLower().Contains(searchString.ToLower()))
+                        .ToList();
+                }
+            }
         }
     }
 }

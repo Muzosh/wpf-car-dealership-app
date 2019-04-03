@@ -9,7 +9,7 @@ namespace BOOP_Project
 {
     public class Car
     {
-        public Guid Guid { get; private set; }
+        public Guid carID { get; private set; }
         public DateTime Added { get; private set; }
 
         public CarCategory CarCategory { get; set; }
@@ -32,7 +32,7 @@ namespace BOOP_Project
         {
             this.Added = DateTime.Now;
             this.LastModified = this.Added;
-            this.Guid = Guid.NewGuid();
+            this.carID = Guid.NewGuid();
         }
     }
 }

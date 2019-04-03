@@ -122,7 +122,7 @@
         <DataGrid x:Name="carsDataGrid" VerticalScrollBarVisibility="Visible" HorizontalAlignment="Center"
             Height="685" Grid.Row="1" Grid.RowSpan="10" VerticalAlignment="Top" Width="760" Grid.Column="0"
             Grid.ColumnSpan="4" BorderBrush="#FFC7C7C7" BorderThickness="2" Margin="0,0,0,0" AutoGenerateColumns="False"
-            IsReadOnly="True" SelectionMode="Single">
+            IsReadOnly="True" SelectionMode="Single" MouseDoubleClick="CarsDataGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Značka" Binding="{Binding Brand}" Width="120" CanUserResize="False" CanUserReorder="False"/>
                 <DataGridTextColumn Header="Model" Binding="{Binding Model}" Width="313" CanUserResize="False" CanUserReorder="False"/>
@@ -143,7 +143,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Přidáno" Width="120" Binding="{Binding Added, StringFormat={}{0:dd/MM/yyyy hh:mm:ss}}"
-                                    CanUserResize="False" CanUserReorder="False"/>
+                                    CanUserResize="False" CanUserReorder="False" SortDirection="Descending"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
