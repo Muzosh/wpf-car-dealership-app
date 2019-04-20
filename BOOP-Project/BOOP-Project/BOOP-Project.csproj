@@ -108,12 +108,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="test.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="poznamky - pak smazat.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="beetle-icon-png-28135-Windows.ico" />

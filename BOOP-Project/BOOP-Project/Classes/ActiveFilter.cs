@@ -14,12 +14,12 @@ namespace BOOP_Project.Classes
         public CarCategory? CarCategory { get; set; }
         public CarType? CarType { get; set; }
         public FuelType? FuelType { get; set; }
-        public int? PrizeFrom { get; set; }
-        public int? PrizeTo { get; set; }
-        public int? KilometresFrom { get; set; }
-        public int? KilometresTo { get; set; }
+        public double? PrizeFrom { get; set; }
+        public double? PrizeTo { get; set; }
+        public double? KilometresFrom { get; set; }
+        public double? KilometresTo { get; set; }
         public int? ModelYearFrom { get; set; }
         public int? ModelYearTo { get; set; }
-        public List<string> searchStrings { get; set; }
+        public List<string> SearchStrings { get; set; }
     }
 }

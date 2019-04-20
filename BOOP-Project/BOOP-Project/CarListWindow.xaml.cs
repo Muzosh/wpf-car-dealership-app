@@ -1,5 +1,6 @@
 ﻿using BOOP_Project.Enums;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -27,31 +28,7 @@ namespace BOOP_Project
         // Event handlers
         private void AddCarButton_Click(object sender, RoutedEventArgs e)
         {
-            //this.OpenCarEditWindow(null);
-            CarList.fullCarList.Add(new Car());
-            CarList.fullCarList[0].Brand = "Tesla";
-            CarList.fullCarList[0].Model = "Model S";
-            CarList.fullCarList[0].CarCategory = CarCategory.Havarované;
-            CarList.fullCarList[0].CarType = CarType.Kombi;
-            CarList.fullCarList[0].FuelType = FuelType.Elektro;
-            CarList.fullCarList[0].TransmissionType = TransmissionType.Automat;
-            CarList.fullCarList[0].Kilometres = 25;
-            CarList.fullCarList[0].Power = 25.5;
-            CarList.fullCarList[0].Prize = 25.5;
-            CarList.fullCarList[0].ModelYear = 1997;
-            CarList.fullCarList[0].SeatCount = 6;
-            CarList.fullCarList.Add(new Car());
-            CarList.fullCarList[1].Brand = "BMW";
-            CarList.fullCarList[1].Model = "M3";
-            CarList.fullCarList[1].CarCategory = CarCategory.Ostatní;
-            CarList.fullCarList[1].CarType = CarType.Terenní;
-            CarList.fullCarList[1].FuelType = FuelType.Nafta;
-            CarList.fullCarList[1].TransmissionType = TransmissionType.Manuál;
-            CarList.fullCarList[1].Kilometres = 34;
-            CarList.fullCarList[1].Power = 34.4;
-            CarList.fullCarList[1].Prize = 34.4;
-            CarList.fullCarList[1].ModelYear = 2008;
-            CarList.fullCarList[1].SeatCount = 2;
+            this.OpenCarEditWindow(null);
 
             this.UpdateAndApplyFilters();
             this.RefreshCarsDataGrid();
@@ -62,7 +39,7 @@ namespace BOOP_Project
             Guid? carID;
             try
             {
-                carID = ((Car)this.carsDataGrid.SelectedItem).carID;
+                carID = ((Car)this.carsDataGrid.SelectedItem).CarID;
             }
             catch (NullReferenceException)
             {
@@ -86,7 +63,7 @@ namespace BOOP_Project
             Guid? carID;
             try
             {
-                carID = ((Car)this.carsDataGrid.SelectedItem).carID;
+                carID = ((Car)this.carsDataGrid.SelectedItem).CarID;
             }
             catch (NullReferenceException)
             {
@@ -107,7 +84,22 @@ namespace BOOP_Project
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
-            this.ImportToCsv();
+            MessageBoxResult msgBoxResult = MessageBox.Show(
+                "Chcete importované auta přidat k existujícím?" +
+                "\nPokud zvolíte možnost \"ne\", pak budou stávající auta smazána.",
+                "Import ze souboru",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question,
+                MessageBoxResult.Cancel);
+
+            if (msgBoxResult == MessageBoxResult.Yes)
+            {
+                this.ImportFromCsv(true);
+            }
+            else if (msgBoxResult == MessageBoxResult.No)
+            {
+                this.ImportFromCsv(false);
+            }
 
             this.UpdateAndApplyFilters();
             this.RefreshCarsDataGrid();
@@ -118,10 +110,15 @@ namespace BOOP_Project
             this.ExportToCsv();
         }
 
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        private void DoubleValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            Regex regex = new Regex("((^[0-9]+,[0-9]*$)|^[0-9]+$)");
+            e.Handled = !regex.IsMatch(((TextBox)e.Source).Text + e.Text);
+        }
+        private void IntegerValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[0-9]");
+            e.Handled = !regex.IsMatch(e.Text);
         }
 
         #region Filter event handlers
@@ -152,32 +149,80 @@ namespace BOOP_Project
 
         private void PrizeFromTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.UpdateAndApplyFilters();
+            if (!this.prizeFromTextBox.Text.Contains(" "))
+            {
+                this.UpdateAndApplyFilters();
+            }
+            else
+            {
+                this.prizeFromTextBox.Text = this.prizeFromTextBox.Text.Replace(" ", "");
+                this.prizeFromTextBox.SelectionStart = this.prizeFromTextBox.Text.Length;
+            }
         }
 
         private void PrizeToTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.UpdateAndApplyFilters();
+            if (!this.prizeToTextBox.Text.Contains(" "))
+            {
+                this.UpdateAndApplyFilters();
+            }
+            else
+            {
+                this.prizeToTextBox.Text = this.prizeToTextBox.Text.Replace(" ", "");
+                this.prizeToTextBox.SelectionStart = this.prizeToTextBox.Text.Length;
+            }
         }
 
         private void KilometresFromTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.UpdateAndApplyFilters();
+            if (!this.kilometresFromTextBox.Text.Contains(" "))
+            {
+                this.UpdateAndApplyFilters();
+            }
+            else
+            {
+                this.kilometresFromTextBox.Text = this.kilometresFromTextBox.Text.Replace(" ", "");
+                this.kilometresFromTextBox.SelectionStart = this.kilometresFromTextBox.Text.Length;
+            }
         }
 
         private void KilometresToTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.UpdateAndApplyFilters();
+            if (!this.kilometresToTextBox.Text.Contains(" "))
+            {
+                this.UpdateAndApplyFilters();
+            }
+            else
+            {
+                this.kilometresToTextBox.Text = this.kilometresToTextBox.Text.Replace(" ", "");
+                this.kilometresToTextBox.SelectionStart = this.kilometresToTextBox.Text.Length;
+            }
         }
 
         private void ModelYearFromTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.UpdateAndApplyFilters();
+            if (!this.modelYearFromTextBox.Text.Contains(" "))
+            {
+                this.UpdateAndApplyFilters();
+            }
+            else
+            {
+                this.modelYearFromTextBox.Text = this.modelYearFromTextBox.Text.Replace(" ", "");
+                this.modelYearFromTextBox.SelectionStart = this.modelYearFromTextBox.Text.Length;
+            }
         }
 
         private void ModelYearToTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            this.UpdateAndApplyFilters();
+            if (!this.modelYearToTextBox.Text.Contains(" "))
+            {
+                this.UpdateAndApplyFilters();
+            }
+            else
+            {
+                this.modelYearToTextBox.Text = this.modelYearToTextBox.Text.Replace(" ", "");
+                this.modelYearToTextBox.SelectionStart = this.modelYearToTextBox.Text.Length;
+            }
         }
 
         private void SearchStringTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -187,62 +232,62 @@ namespace BOOP_Project
         #endregion
 
         #region Nulling filter event handlers
-        private void CategoryComboBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void CategoryComboBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.categoryComboBox.SelectedIndex = -1;
         }
 
-        private void TypeComboBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void TypeComboBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.typeComboBox.SelectedIndex = -1;
         }
 
-        private void FuelTypeComboBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void FuelTypeComboBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.fuelTypeComboBox.SelectedIndex = -1;
         }
 
-        private void BrandTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void BrandTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.brandTextBox.Text = null;
         }
 
-        private void ModelTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ModelTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.modelTextBox.Text = null;
         }
 
-        private void PrizeFromTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void PrizeFromTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.prizeFromTextBox.Text = null;
         }
 
-        private void PrizeToTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void PrizeToTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.prizeToTextBox.Text = null;
         }
 
-        private void KilometresFromTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void KilometresFromTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.kilometresFromTextBox.Text = null;
         }
 
-        private void KilometresToTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void KilometresToTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.kilometresToTextBox.Text = null;
         }
 
-        private void ModelYearFromTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ModelYearFromTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.modelYearFromTextBox.Text = null;
         }
 
-        private void ModelYearToTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ModelYearToTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.modelYearToTextBox.Text = null;
         }
 
-        private void SearchStringTextBox_PreviewMouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void SearchStringTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             this.searchStringTextBox.Text = null;
         }
@@ -262,10 +307,10 @@ namespace BOOP_Project
                 (CarCategory?)this.categoryComboBox.SelectedItem,
                 (CarType?)this.typeComboBox.SelectedItem,
                 (FuelType?)this.fuelTypeComboBox.SelectedItem,
-                int.TryParse(this.prizeFromTextBox.Text, out int result1) ? result1 : (int?)null,
-                int.TryParse(this.prizeToTextBox.Text, out int result2) ? result2 : (int?)null,
-                int.TryParse(this.kilometresFromTextBox.Text, out int result3) ? result3 : (int?)null,
-                int.TryParse(this.kilometresToTextBox.Text, out int result4) ? result4 : (int?)null,
+                double.TryParse(this.prizeFromTextBox.Text, out double result1) ? result1 : (double?)null,
+                double.TryParse(this.prizeToTextBox.Text, out double result2) ? result2 : (double?)null,
+                double.TryParse(this.kilometresFromTextBox.Text, out double result3) ? result3 : (double?)null,
+                double.TryParse(this.kilometresToTextBox.Text, out double result4) ? result4 : (double?)null,
                 int.TryParse(this.modelYearFromTextBox.Text, out int result5) ? result5 : (int?)null,
                 int.TryParse(this.modelYearToTextBox.Text, out int result6) ? result6 : (int?)null,
                 this.searchStringTextBox.Text);
@@ -280,42 +325,14 @@ namespace BOOP_Project
             carEditWindow.ShowDialog();
         }
 
-        private void ImportToCsv()
+        private void ImportFromCsv(bool addToExistingCars)
         {
-            // Configure open file dialog box
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            // dlg.FileName = "Document"; // Default file name
-            dlg.DefaultExt = ".txt"; // Default file extension
-            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
-
-            // Show open file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Process open file dialog box results
-            if (result == true)
-            {
-                // Open document
-                string filename = dlg.FileName;
-            }
+            ImportExportHelper.ImportFromCsv(addToExistingCars);
         }
 
         private void ExportToCsv()
         {
-            // Configure save file dialog box
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = "Document"; // Default file name
-            dlg.DefaultExt = ".txt"; // Default file extension
-            dlg.Filter = "Text documents (.txt)|*.txt"; // Filter files by extension
-
-            // Show save file dialog box
-            Nullable<bool> result = dlg.ShowDialog();
-
-            // Process save file dialog box results
-            if (result == true)
-            {
-                // Save document
-                string filename = dlg.FileName;
-            }
+            ImportExportHelper.ExportToCsv();
         }
     }
 }

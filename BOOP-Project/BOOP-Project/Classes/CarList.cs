@@ -22,13 +22,13 @@ namespace BOOP_Project
             CarCategory? carCategory,
             CarType? carType,
             FuelType? fuelType,
-            int? prizeFrom,
-            int? prizeTo,
-            int? kilometresFrom,
-            int? kilometresTo,
+            double? prizeFrom,
+            double? prizeTo,
+            double? kilometresFrom,
+            double? kilometresTo,
             int? modelYearFrom,
             int? modelYearTo,
-            string searchString)
+            string searchStrings)
         {
             // Update filters
             activeFilter.Brand = brand;
@@ -42,7 +42,7 @@ namespace BOOP_Project
             activeFilter.KilometresTo = kilometresTo;
             activeFilter.ModelYearFrom = modelYearFrom;
             activeFilter.ModelYearTo = modelYearTo;
-            activeFilter.searchStrings = searchString.Split(',', ' ', ';', '.').ToList();
+            activeFilter.SearchStrings = searchStrings.Split(',', ' ', ';', '.').ToList();
         }
 
         public static void ApplyActiveFilter()
@@ -126,9 +126,9 @@ namespace BOOP_Project
                     .ToList();
             }
 
-            if (activeFilter.searchStrings.Any(x => x != string.Empty))
+            if (activeFilter.SearchStrings.Any(x => x != string.Empty))
             {
-                foreach (string searchString in activeFilter.searchStrings)
+                foreach (string searchString in activeFilter.SearchStrings)
                 {
                     filteredCarList = filteredCarList
                         .Where(x =>
@@ -150,6 +150,8 @@ namespace BOOP_Project
                         .ToList();
                 }
             }
+
+            filteredCarList = filteredCarList.OrderByDescending(x => x.Added).ToList();
         }
     }
 }

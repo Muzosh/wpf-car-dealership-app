@@ -27,92 +27,100 @@
                Height="40" Width="90" FontFamily="Tahoma" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontSize="14"/>
         <ComboBox x:Name="categoryComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
-                  FontFamily="Tahoma" Cursor="Pen" FontSize="14"/>
+                  FontFamily="Tahoma" Cursor="Hand" FontSize="14" MouseDoubleClick="CategoryComboBox_MouseDoubleClick"/>
 
         <Label x:Name="brandLabel" Content="Značka" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="1" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="brandTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="1" 
                  TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma"
-                 FontSize="14" Cursor="Pen"/>
+                 FontSize="14" Cursor="Pen" MouseDoubleClick="BrandTextBox_MouseDoubleClick"/>
 
         <Label x:Name="modelLabel" Content="Model" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="2" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
-        <TextBox x:Name="modeTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="2" 
+        <TextBox x:Name="modelTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="2" 
                  TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
-                 FontSize="14"/>
+                 FontSize="14" MouseDoubleClick="ModelTextBox_MouseDoubleClick"/>
 
         <Label x:Name="fuelTypeLabel" Content="Typ paliva" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="3" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <ComboBox x:Name="fuelTypeComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
-                  Grid.Row="3" FontFamily="Tahoma" Cursor="Pen" FontSize="14"/>
+                  Grid.Row="3" FontFamily="Tahoma" Cursor="Hand" FontSize="14" MouseDoubleClick="FuelTypeComboBox_MouseDoubleClick"/>
 
         <Label x:Name="prizeLabel" Content="Cena" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="4" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="prizeTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="4" 
                  TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
-                 FontSize="14"/>
+                 FontSize="14" MouseDoubleClick="PrizeTextBox_MouseDoubleClick" PreviewTextInput="DoubleValidationTextBox"
+                 TextChanged="PrizeTextBox_TextChanged"/>
 
         <Label x:Name="yearLabel" Content="Rok výroby" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="5" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
-        <TextBox x:Name="yearTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="5" 
+        <TextBox x:Name="modelYearTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="5" 
                  TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
-                 FontSize="14"/>
+                 FontSize="14" MouseDoubleClick="ModelYearTextBox_MouseDoubleClick" PreviewTextInput="IntegerValidationTextBox"
+                 TextChanged="ModelYearTextBox_TextChanged"/>
 
         <Label x:Name="kilometresLabel" Content="Najeté km" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="kilometresTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Column="1" Grid.Row="0" 
                  TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
-                 FontSize="14"/>
+                 FontSize="14" MouseDoubleClick="KilometresTextBox_MouseDoubleClick" PreviewTextInput="DoubleValidationTextBox"
+                 TextChanged="KilometresTextBox_TextChanged"/>
 
         <Label x:Name="typeLabel" Content="Typ" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="1" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
-                  Grid.Column="1" Grid.Row="1" FontFamily="Tahoma" Cursor="Pen" FontSize="14"/>
+                  Grid.Column="1" Grid.Row="1" FontFamily="Tahoma" Cursor="Hand" FontSize="14" MouseDoubleClick="TypeComboBox_MouseDoubleClick"/>
 
         <Label x:Name="powerLavel" Content="Výkon" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" 
                HorizontalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="powerTextbox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Column="1" Grid.Row="2" 
                  TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
-                 FontSize="14"/>
+                 FontSize="14" MouseDoubleClick="PowerTextbox_MouseDoubleClick" PreviewTextInput="DoubleValidationTextBox" TextChanged="PowerTextbox_TextChanged"/>
 
         <Label x:Name="seatCountLabel" Content="Počet míst" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" 
                HorizontalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="seatCountTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Column="1" Grid.Row="3" 
                  TextWrapping="NoWrap" Text="" VerticalAlignment="Center" Width="132" FontFamily="Tahoma" Cursor="Pen"
-                 FontSize="14"/>
+                 FontSize="14" MouseDoubleClick="SeatCountTextBox_MouseDoubleClick" PreviewTextInput="IntegerValidationTextBox" TextChanged="SeatCountTextBox_TextChanged"/>
 
         <Label x:Name="transmissionLabel" Content="Převodovka" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="4" VerticalContentAlignment="Center" 
                HorizontalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <ComboBox x:Name="transmissionComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
-                  Grid.Column="1" Grid.Row="4" FontFamily="Tahoma" Cursor="Pen" FontSize="14"/>
+                  Grid.Column="1" Grid.Row="4" FontFamily="Tahoma" Cursor="Hand" FontSize="14"
+                  MouseDoubleClick="TransmissionComboBox_MouseDoubleClick"/>
 
         <Label x:Name="featuresLabel" Content="Výbava" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="5" VerticalContentAlignment="Center" 
                HorizontalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="featuresTextBox" HorizontalAlignment="Left" Height="50" Margin="126,0,0,0" Grid.Column="1" Grid.Row="5" 
                  TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="166" FontFamily="Tahoma" Cursor="Pen"
-                  FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True"/>
+                 FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True"
+                 MouseDoubleClick="FeaturesTextBox_MouseDoubleClick"/>
 
         <Label x:Name="dedscriptionLabel" Content="Popis" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="6" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="descriptionTextBox" HorizontalAlignment="Left" Height="53" Margin="121,0,0,0" Grid.Row="6" TextWrapping="Wrap" 
                  Text="" VerticalAlignment="Center" Width="510" Grid.ColumnSpan="2" FontFamily="Tahoma" Cursor="Pen"
-                 FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True"/>
+                 FontSize="14" ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" AcceptsTab="True"
+                 MouseDoubleClick="DescriptionTextBox_MouseDoubleClick"/>
 
-        <Button x:Name="saveCarButton" Content="Uložit" HorizontalAlignment="Right" Margin="0,0,23,0" 
+        <Button x:Name="saveCarButton" Content="Uložit" HorizontalAlignment="Right" Margin="0,0,85,0" 
                 Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30" Click="SaveCarButton_Click"/>
-        <Button x:Name="cancelButton" Content="Zrušit" HorizontalAlignment="Left" Margin="23,0,0,0" 
-                Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30" Grid.Column="1" Click="CancelButton_Click"/>
+        <Button x:Name="cancelButton" Content="Zrušit" HorizontalAlignment="Center" Margin="0,0,0,0" Grid.ColumnSpan="2"
+                Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30" Grid.Column="0" Click="CancelButton_Click"/>
+        <Button x:Name="deleteButton" Content="Smazat" HorizontalAlignment="Left" Margin="85,0,0,0" 
+                Grid.Row="7" VerticalAlignment="Center" Width="90" Height="30" Grid.Column="1" Click="DeleteButton_Click"/>
     </Grid>
 </Window>

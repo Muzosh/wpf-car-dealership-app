@@ -9,8 +9,8 @@ namespace BOOP_Project
 {
     public class Car
     {
-        public Guid carID { get; private set; }
-        public DateTime Added { get; private set; }
+        public Guid CarID { get; set; }
+        public DateTime Added { get; set; }
 
         public CarCategory CarCategory { get; set; }
         public CarType CarType { get; set; }
@@ -28,11 +28,18 @@ namespace BOOP_Project
         public int SeatCount { get; set; }
         public DateTime LastModified { get; set; }
 
-        public Car()
+        public Car() : this(false)
         {
-            this.Added = DateTime.Now;
-            this.LastModified = this.Added;
-            this.carID = Guid.NewGuid();
+        }
+
+        public Car(bool isFromImport)
+        {
+            if (!isFromImport)
+            {
+                this.Added = DateTime.Now;
+                this.LastModified = this.Added;
+                this.CarID = Guid.NewGuid();
+            }
         }
     }
 }
