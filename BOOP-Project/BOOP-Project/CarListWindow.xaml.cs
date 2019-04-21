@@ -85,12 +85,12 @@ namespace BOOP_Project
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult msgBoxResult = MessageBox.Show(
-                "Chcete importované auta přidat k existujícím?" +
+                "Chcete importovaná auta přidat k existujícím?" +
                 "\nPokud zvolíte možnost \"ne\", pak budou stávající auta smazána.",
                 "Import ze souboru",
-                MessageBoxButton.YesNo,
+                MessageBoxButton.YesNoCancel,
                 MessageBoxImage.Question,
-                MessageBoxResult.Cancel);
+                MessageBoxResult.No);
 
             if (msgBoxResult == MessageBoxResult.Yes)
             {
@@ -316,7 +316,6 @@ namespace BOOP_Project
                 this.searchStringTextBox.Text);
 
             CarList.ApplyActiveFilter();
-            this.RefreshCarsDataGrid();
         }
 
         private void OpenCarEditWindow(Guid? carID)
