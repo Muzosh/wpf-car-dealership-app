@@ -14,8 +14,6 @@ namespace BOOP_Project
     /// </summary>
     public partial class CarListWindow : Window
     {
-        // TODO: Ke konci možná spojit metody ApplyAndUpdateFilters a RefreshCarsDataGrid dohromady a udělat 
-        // filteredCarList private
         public CarListWindow()
         {
             InitializeComponent();
@@ -31,7 +29,6 @@ namespace BOOP_Project
             this.OpenCarEditWindow(null);
 
             this.UpdateAndApplyFilters();
-            this.RefreshCarsDataGrid();
         }
 
         private void EditCarButton_Click(object sender, RoutedEventArgs e)
@@ -55,7 +52,6 @@ namespace BOOP_Project
 
             this.carsDataGrid.SelectedItem = null;
             this.UpdateAndApplyFilters();
-            this.RefreshCarsDataGrid();
         }
 
         private void CarsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -79,7 +75,6 @@ namespace BOOP_Project
 
             this.carsDataGrid.SelectedItem = null;
             this.UpdateAndApplyFilters();
-            this.RefreshCarsDataGrid();
         }
 
         private void ImportButton_Click(object sender, RoutedEventArgs e)
@@ -102,7 +97,6 @@ namespace BOOP_Project
             }
 
             this.UpdateAndApplyFilters();
-            this.RefreshCarsDataGrid();
         }
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
@@ -313,9 +307,14 @@ namespace BOOP_Project
                 double.TryParse(this.kilometresToTextBox.Text, out double result4) ? result4 : (double?)null,
                 int.TryParse(this.modelYearFromTextBox.Text, out int result5) ? result5 : (int?)null,
                 int.TryParse(this.modelYearToTextBox.Text, out int result6) ? result6 : (int?)null,
+                double.TryParse(this.powerFromTextBox.Text, out double result7) ? result7 : (double?)null,
+                double.TryParse(this.powerToTextBox.Text, out double result8) ? result8 : (double?)null,
+                int.TryParse(this.seatCountFromTextBox.Text, out int result9) ? result9 : (int?)null,
+                int.TryParse(this.seatCountToTextBox.Text, out int result10) ? result10 : (int?)null,
                 this.searchStringTextBox.Text);
 
             CarList.ApplyActiveFilter();
+            this.RefreshCarsDataGrid();
         }
 
         private void OpenCarEditWindow(Guid? carID)

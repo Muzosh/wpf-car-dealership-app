@@ -28,6 +28,10 @@ namespace BOOP_Project
             double? kilometresTo,
             int? modelYearFrom,
             int? modelYearTo,
+            double? powerFrom,
+            double? powerTo,
+            int? seatCountFrom,
+            int? seatCountTo,
             string searchStrings)
         {
             // Update filters
@@ -42,6 +46,10 @@ namespace BOOP_Project
             activeFilter.KilometresTo = kilometresTo;
             activeFilter.ModelYearFrom = modelYearFrom;
             activeFilter.ModelYearTo = modelYearTo;
+            activeFilter.PowerFrom = powerFrom;
+            activeFilter.PowerTo = powerTo;
+            activeFilter.SeatCountFrom = seatCountFrom;
+            activeFilter.SeatCountTo = seatCountTo;
             activeFilter.SearchStrings = searchStrings.Split(',', ' ', ';', '.').ToList();
         }
 
@@ -84,7 +92,7 @@ namespace BOOP_Project
                     .ToList();
             }
 
-            if(activeFilter.PrizeFrom != null)
+            if (activeFilter.PrizeFrom != null)
             {
                 filteredCarList = filteredCarList
                     .Where(x => x.Prize >= activeFilter.PrizeFrom)
@@ -123,6 +131,34 @@ namespace BOOP_Project
             {
                 filteredCarList = filteredCarList
                     .Where(x => x.ModelYear <= activeFilter.ModelYearTo)
+                    .ToList();
+            }
+
+            if (activeFilter.PowerFrom != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.Power >= activeFilter.PowerFrom)
+                    .ToList();
+            }
+
+            if (activeFilter.PowerTo != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.Power <= activeFilter.PowerTo)
+                    .ToList();
+            }
+
+            if (activeFilter.SeatCountFrom != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.SeatCount >= activeFilter.SeatCountFrom)
+                    .ToList();
+            }
+
+            if (activeFilter.SeatCountTo != null)
+            {
+                filteredCarList = filteredCarList
+                    .Where(x => x.SeatCount <= activeFilter.SeatCountTo)
                     .ToList();
             }
 

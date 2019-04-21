@@ -20,6 +20,10 @@ namespace BOOP_Project.Classes
         public double? KilometresTo { get; set; }
         public int? ModelYearFrom { get; set; }
         public int? ModelYearTo { get; set; }
+        public double? PowerFrom { get; set; }
+        public double? PowerTo { get; set; }
+        public int? SeatCountFrom { get; set; }
+        public int? SeatCountTo { get; set; }
         public List<string> SearchStrings { get; set; }
     }
 }
