@@ -33,8 +33,8 @@ namespace BOOP_Project
         // Helpers
         private void RefreshDataSource(Guid carID)
         {
-            Car passedCar = CarList.fullCarList.Find(x => x.CarID == carID);
-            if (passedCar == null)
+            Car currentCar = CarList.fullCarList.Find(x => x.CarID == carID);
+            if (currentCar == null)
             {
                 MessageBox.Show(
                     "Někde nastala chyba, vybrané auto nebylo nalezeno.",
@@ -44,30 +44,30 @@ namespace BOOP_Project
                 return;
             }
 
-            this.categoryComboBox.SelectedItem = passedCar.CarCategory;
-            this.brandTextBox.Text = passedCar.Brand;
-            this.modelTextBox.Text = passedCar.Model;
-            this.fuelTypeComboBox.SelectedItem = passedCar.FuelType;
-            this.prizeTextBox.Text = passedCar.Prize.ToString();
-            this.modelYearTextBox.Text = passedCar.ModelYear.ToString();
-            this.kilometresTextBox.Text = passedCar.Kilometres.ToString();
-            this.typeComboBox.SelectedItem = passedCar.CarType;
-            this.powerTextbox.Text = passedCar.Power.ToString();
-            this.seatCountTextBox.Text = passedCar.SeatCount.ToString();
-            this.transmissionComboBox.SelectedItem = passedCar.TransmissionType;
-            this.featuresTextBox.Text = passedCar.CarFeatures;
-            this.descriptionTextBox.Text = passedCar.CarDescription;
+            this.categoryComboBox.SelectedItem = currentCar.CarCategory;
+            this.brandTextBox.Text = currentCar.Brand;
+            this.modelTextBox.Text = currentCar.Model;
+            this.fuelTypeComboBox.SelectedItem = currentCar.FuelType;
+            this.prizeTextBox.Text = currentCar.Prize.ToString();
+            this.modelYearTextBox.Text = currentCar.ModelYear.ToString();
+            this.kilometresTextBox.Text = currentCar.Kilometres.ToString();
+            this.typeComboBox.SelectedItem = currentCar.CarType;
+            this.powerTextbox.Text = currentCar.Power.ToString();
+            this.seatCountTextBox.Text = currentCar.SeatCount.ToString();
+            this.transmissionComboBox.SelectedItem = currentCar.TransmissionType;
+            this.featuresTextBox.Text = currentCar.CarFeatures;
+            this.descriptionTextBox.Text = currentCar.CarDescription;
         }
 
         private int SaveCar()
         {
-            Car selectedCar;
+            Car currentCar;
             Car carToSave;
 
             if (passedCarID.HasValue)
             {
-                selectedCar = CarList.fullCarList.Find(x => x.CarID == passedCarID);
-                if (selectedCar == null)
+                currentCar = CarList.fullCarList.Find(x => x.CarID == passedCarID);
+                if (currentCar == null)
                 {
                     MessageBox.Show(
                         "Někde nastala chyba, editované auto nebylo nalezeno.",
@@ -79,17 +79,17 @@ namespace BOOP_Project
             }
             else
             {
-                selectedCar = new Car();
+                currentCar = new Car();
             }
 
-            carToSave = this.ValidateGuiAndSetCarProperties(selectedCar);
+            carToSave = this.ValidateGuiAndSetCarProperties(currentCar);
 
             if (carToSave == null)
             {
                 return -1;
             }
 
-            CarList.fullCarList.Remove(selectedCar);
+            CarList.fullCarList.Remove(currentCar);
             CarList.fullCarList.Add(carToSave);
             return 1;
         }
@@ -259,7 +259,7 @@ namespace BOOP_Project
 
         private void SaveCarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.SaveCar() != -1)
+            if (this.SaveCar() == 1)
             {
                 this.Close();
             }
@@ -274,7 +274,20 @@ namespace BOOP_Project
         {
             if (passedCarID.HasValue)
             {
-                CarList.fullCarList.Remove(CarList.fullCarList.Find(x => x.CarID == passedCarID.Value));
+                Car currentCar = CarList.fullCarList.Find(x => x.CarID == passedCarID);
+                if (currentCar == null)
+                {
+                    MessageBox.Show(
+                        "Někde nastala chyba, editované auto nebylo nalezeno.",
+                        "Chyba!",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
+                else
+                {
+                    CarList.fullCarList.Remove(currentCar);
+                }
+
                 this.Close();
             }
             else

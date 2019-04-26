@@ -85,15 +85,15 @@ namespace BOOP_Project
                 "Import ze souboru",
                 MessageBoxButton.YesNoCancel,
                 MessageBoxImage.Question,
-                MessageBoxResult.No);
+                MessageBoxResult.Yes);
 
             if (msgBoxResult == MessageBoxResult.Yes)
             {
-                this.ImportFromCsv(true);
+                ImportExportHelper.ImportFromCsv(true);
             }
             else if (msgBoxResult == MessageBoxResult.No)
             {
-                this.ImportFromCsv(false);
+                ImportExportHelper.ImportFromCsv(false);
             }
 
             this.UpdateAndApplyFilters();
@@ -101,7 +101,7 @@ namespace BOOP_Project
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
-            this.ExportToCsv();
+            ImportExportHelper.ExportToCsv();
         }
 
         private void DoubleValidationTextBox(object sender, TextCompositionEventArgs e)
@@ -321,16 +321,6 @@ namespace BOOP_Project
         {
             CarEditWindow carEditWindow = new CarEditWindow(carID);
             carEditWindow.ShowDialog();
-        }
-
-        private void ImportFromCsv(bool addToExistingCars)
-        {
-            ImportExportHelper.ImportFromCsv(addToExistingCars);
-        }
-
-        private void ExportToCsv()
-        {
-            ImportExportHelper.ExportToCsv();
         }
     }
 }

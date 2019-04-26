@@ -31,7 +31,11 @@ namespace BOOP_Project
                 bool opened = false;
                 try
                 {
-                    CarList.fullCarList.Clear();
+                    if (!addToExistingCars)
+                    {
+                        CarList.fullCarList.Clear();
+                    }
+                    
                     using (StreamReader sr =
                         new StreamReader(File.Open(ofd.FileName, FileMode.Open), Encoding.UTF8))
                     {
@@ -45,7 +49,7 @@ namespace BOOP_Project
                                 MessageBoxImage.Error);
                             return;
                         }
-
+                        
                         while (!sr.EndOfStream)
                         {
                             AddCarToFullCarList(sr.ReadLine().Split(';'));
