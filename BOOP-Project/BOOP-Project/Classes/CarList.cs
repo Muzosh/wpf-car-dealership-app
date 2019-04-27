@@ -102,7 +102,7 @@ namespace BOOP_Project
             if (activeFilter.PrizeTo != null)
             {
                 filteredCarList = filteredCarList
-                    .Where(x => x.Prize <= activeFilter.PrizeFrom)
+                    .Where(x => x.Prize <= activeFilter.PrizeTo)
                     .ToList();
             }
 
