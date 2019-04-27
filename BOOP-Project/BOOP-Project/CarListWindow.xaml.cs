@@ -33,7 +33,7 @@ namespace BOOP_Project
 
         private void EditCarButton_Click(object sender, RoutedEventArgs e)
         {
-            Guid? carID;
+            Guid carID;
             try
             {
                 carID = ((Car)this.carsDataGrid.SelectedItem).CarID;
@@ -48,7 +48,7 @@ namespace BOOP_Project
                 return;
             }
 
-            this.OpenCarEditWindow(carID.Value);
+            this.OpenCarEditWindow(carID);
 
             this.carsDataGrid.SelectedItem = null;
             this.UpdateAndApplyFilters();
@@ -56,7 +56,7 @@ namespace BOOP_Project
 
         private void CarsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            Guid? carID;
+            Guid carID;
             try
             {
                 carID = ((Car)this.carsDataGrid.SelectedItem).CarID;
@@ -71,7 +71,7 @@ namespace BOOP_Project
                 return;
             }
 
-            this.OpenCarEditWindow(carID.Value);
+            this.OpenCarEditWindow(carID);
 
             this.carsDataGrid.SelectedItem = null;
             this.UpdateAndApplyFilters();
@@ -109,12 +109,50 @@ namespace BOOP_Project
             Regex regex = new Regex("((^[0-9]+,[0-9]*$)|^[0-9]+$)");
             e.Handled = !regex.IsMatch(((TextBox)e.Source).Text + e.Text);
         }
+
         private void IntegerValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[0-9]");
             e.Handled = !regex.IsMatch(e.Text);
         }
 
+        // Helpers
+        private void RefreshCarsDataGrid()
+        {
+            this.carsDataGrid.ItemsSource = CarList.filteredCarList;
+        }
+
+        private void UpdateAndApplyFilters()
+        {
+            CarList.UpdateActiveFilter(
+                this.brandTextBox.Text,
+                this.modelTextBox.Text,
+                (CarCategory?)this.categoryComboBox.SelectedItem,
+                (CarType?)this.typeComboBox.SelectedItem,
+                (FuelType?)this.fuelTypeComboBox.SelectedItem,
+                double.TryParse(this.prizeFromTextBox.Text, out double result1) ? result1 : (double?)null,
+                double.TryParse(this.prizeToTextBox.Text, out double result2) ? result2 : (double?)null,
+                double.TryParse(this.kilometresFromTextBox.Text, out double result3) ? result3 : (double?)null,
+                double.TryParse(this.kilometresToTextBox.Text, out double result4) ? result4 : (double?)null,
+                int.TryParse(this.modelYearFromTextBox.Text, out int result5) ? result5 : (int?)null,
+                int.TryParse(this.modelYearToTextBox.Text, out int result6) ? result6 : (int?)null,
+                double.TryParse(this.powerFromTextBox.Text, out double result7) ? result7 : (double?)null,
+                double.TryParse(this.powerToTextBox.Text, out double result8) ? result8 : (double?)null,
+                int.TryParse(this.seatCountFromTextBox.Text, out int result9) ? result9 : (int?)null,
+                int.TryParse(this.seatCountToTextBox.Text, out int result10) ? result10 : (int?)null,
+                this.searchStringTextBox.Text);
+
+            CarList.ApplyActiveFilter();
+            this.RefreshCarsDataGrid();
+        }
+
+        private void OpenCarEditWindow(Guid? carID)
+        {
+            CarEditWindow carEditWindow = new CarEditWindow(carID);
+            carEditWindow.ShowDialog();
+        }
+
+        // Regions
         #region Filter event handlers
         private void BrandTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -286,41 +324,5 @@ namespace BOOP_Project
             this.searchStringTextBox.Text = null;
         }
         #endregion
-
-        // Helpers
-        private void RefreshCarsDataGrid()
-        {
-            this.carsDataGrid.ItemsSource = CarList.filteredCarList;
-        }
-
-        private void UpdateAndApplyFilters()
-        {
-            CarList.UpdateActiveFilter(
-                this.brandTextBox.Text,
-                this.modelTextBox.Text,
-                (CarCategory?)this.categoryComboBox.SelectedItem,
-                (CarType?)this.typeComboBox.SelectedItem,
-                (FuelType?)this.fuelTypeComboBox.SelectedItem,
-                double.TryParse(this.prizeFromTextBox.Text, out double result1) ? result1 : (double?)null,
-                double.TryParse(this.prizeToTextBox.Text, out double result2) ? result2 : (double?)null,
-                double.TryParse(this.kilometresFromTextBox.Text, out double result3) ? result3 : (double?)null,
-                double.TryParse(this.kilometresToTextBox.Text, out double result4) ? result4 : (double?)null,
-                int.TryParse(this.modelYearFromTextBox.Text, out int result5) ? result5 : (int?)null,
-                int.TryParse(this.modelYearToTextBox.Text, out int result6) ? result6 : (int?)null,
-                double.TryParse(this.powerFromTextBox.Text, out double result7) ? result7 : (double?)null,
-                double.TryParse(this.powerToTextBox.Text, out double result8) ? result8 : (double?)null,
-                int.TryParse(this.seatCountFromTextBox.Text, out int result9) ? result9 : (int?)null,
-                int.TryParse(this.seatCountToTextBox.Text, out int result10) ? result10 : (int?)null,
-                this.searchStringTextBox.Text);
-
-            CarList.ApplyActiveFilter();
-            this.RefreshCarsDataGrid();
-        }
-
-        private void OpenCarEditWindow(Guid? carID)
-        {
-            CarEditWindow carEditWindow = new CarEditWindow(carID);
-            carEditWindow.ShowDialog();
-        }
     }
 }

@@ -296,6 +296,7 @@ namespace BOOP_Project
             }
         }
 
+        //Regions
         #region Nulling filter event handlers
         private void CategoryComboBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -363,6 +364,7 @@ namespace BOOP_Project
         }
         #endregion
 
+        #region Removing spaces
         private void PrizeTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (this.prizeTextBox.Text.Contains(" "))
@@ -406,5 +408,6 @@ namespace BOOP_Project
                 this.seatCountTextBox.SelectionStart = this.seatCountTextBox.Text.Length;
             }
         }
+        #endregion
     }
 }
