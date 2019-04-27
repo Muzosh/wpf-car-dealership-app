@@ -6,7 +6,13 @@
         xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
         mc:Ignorable="d"
         Title="DzadiMuziBazar" Height="800" Width="1083" ResizeMode="CanMinimize"
-        WindowStartupLocation="CenterScreen" Icon="beetle-icon-png-28135-Windows.ico" Background="#FFCEE0BF">
+        WindowStartupLocation="CenterScreen" Icon="beetle-icon-png-28135-Windows.ico">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="White" Offset="0.996"/>
+            <GradientStop Color="#FFFFC57E"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>

@@ -5,9 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Přidání/Editace" Height="500" Width="676.875"
-        WindowStartupLocation="CenterScreen" Background="#FFE5EDDA" Foreground="{x:Null}"
+        WindowStartupLocation="CenterScreen" Foreground="{x:Null}"
         Icon="beetle-icon-png-28135-Windows.ico"
         ResizeMode="CanMinimize">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="White" Offset="0.996"/>
+            <GradientStop Color="#FFFFC57E"/>
+        </LinearGradientBrush>
+    </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

@@ -94,14 +94,14 @@ namespace BOOP_Project
             return 1;
         }
 
-        private Car ValidateGuiAndSetCarProperties(Car car)
+        private Car ValidateGuiAndSetCarProperties(Car currentCar)
         {
             StringBuilder sb = new StringBuilder();
 
             // CarCategory
             if (this.categoryComboBox.SelectedIndex != -1)
             {
-                car.CarCategory = (CarCategory)this.categoryComboBox.SelectedItem;
+                currentCar.CarCategory = (CarCategory)this.categoryComboBox.SelectedItem;
             }
             else
             {
@@ -111,7 +111,7 @@ namespace BOOP_Project
             // Brand
             if (this.brandTextBox.Text != string.Empty)
             {
-                car.Brand = this.brandTextBox.Text;
+                currentCar.Brand = this.brandTextBox.Text;
             }
             else
             {
@@ -121,7 +121,7 @@ namespace BOOP_Project
             // Model
             if (this.modelTextBox.Text != string.Empty)
             {
-                car.Model = this.modelTextBox.Text;
+                currentCar.Model = this.modelTextBox.Text;
             }
             else
             {
@@ -131,7 +131,7 @@ namespace BOOP_Project
             // FuelType
             if (this.fuelTypeComboBox.SelectedIndex != -1)
             {
-                car.FuelType = (FuelType)this.fuelTypeComboBox.SelectedItem;
+                currentCar.FuelType = (FuelType)this.fuelTypeComboBox.SelectedItem;
             }
             else
             {
@@ -141,7 +141,7 @@ namespace BOOP_Project
             // Prize
             if (double.TryParse(this.prizeTextBox.Text, out double result4))
             {
-                car.Prize = result4;
+                currentCar.Prize = result4;
             }
             else
             {
@@ -151,7 +151,7 @@ namespace BOOP_Project
             // ModelYear
             if (int.TryParse(this.modelYearTextBox.Text, out int result2))
             {
-                car.ModelYear = result2;
+                currentCar.ModelYear = result2;
             }
             else
             {
@@ -161,7 +161,7 @@ namespace BOOP_Project
             // CarDescription
             if (this.descriptionTextBox.Text != string.Empty)
             {
-                car.CarDescription = this.descriptionTextBox.Text;
+                currentCar.CarDescription = this.descriptionTextBox.Text;
             }
             else
             {
@@ -171,7 +171,7 @@ namespace BOOP_Project
             // Kilometres
             if (double.TryParse(this.kilometresTextBox.Text, out double result1))
             {
-                car.Kilometres = result1;
+                currentCar.Kilometres = result1;
             }
             else
             {
@@ -181,7 +181,7 @@ namespace BOOP_Project
             // CarType
             if (this.typeComboBox.SelectedIndex != -1)
             {
-                car.CarType = (CarType)this.typeComboBox.SelectedItem;
+                currentCar.CarType = (CarType)this.typeComboBox.SelectedItem;
             }
             else
             {
@@ -191,7 +191,7 @@ namespace BOOP_Project
             // Power
             if (double.TryParse(this.powerTextbox.Text, out double result3))
             {
-                car.Power = result3;
+                currentCar.Power = result3;
             }
             else
             {
@@ -201,7 +201,7 @@ namespace BOOP_Project
             // SeatCount
             if (int.TryParse(this.seatCountTextBox.Text, out int result5))
             {
-                car.SeatCount = result5;
+                currentCar.SeatCount = result5;
             }
             else
             {
@@ -211,7 +211,7 @@ namespace BOOP_Project
             // TransmissionType
             if (this.transmissionComboBox.SelectedIndex != -1)
             {
-                car.TransmissionType = (TransmissionType)this.transmissionComboBox.SelectedItem; ;
+                currentCar.TransmissionType = (TransmissionType)this.transmissionComboBox.SelectedItem; ;
             }
             else
             {
@@ -221,17 +221,18 @@ namespace BOOP_Project
             // CarFeatures
             if (this.featuresTextBox.Text != string.Empty)
             {
-                car.CarFeatures = this.featuresTextBox.Text;
+                currentCar.CarFeatures = this.featuresTextBox.Text;
             }
             else
             {
                 sb.Append("výbava, ");
             }
 
+            // ...
             if (sb.Length == 0)
             {
-                car.LastModified = DateTime.Now;
-                return car;
+                currentCar.LastModified = DateTime.Now;
+                return currentCar;
             }
             else
             {
