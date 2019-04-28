@@ -80,18 +80,18 @@
             Grid.Row="5" VerticalAlignment="Center" Width="150" FontFamily="Tahoma" FontSize="14" Cursor="Hand"
                   SelectionChanged="FuelTypeComboBox_SelectionChanged" MouseDoubleClick="FuelTypeComboBox_MouseDoubleClick"/>
 
-        <Label x:Name="prizeFromLabel" Content="Cena od:" Grid.Column="4" HorizontalAlignment="Left"
+        <Label x:Name="priceFromLabel" Content="Cena od:" Grid.Column="4" HorizontalAlignment="Left"
             Margin="10,0,0,0" Grid.Row="6" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
-        <TextBox x:Name="prizeFromTextBox" Grid.Column="4" HorizontalAlignment="Left" Height="26" Margin="105,0,0,0"
+        <TextBox x:Name="priceFromTextBox" Grid.Column="4" HorizontalAlignment="Left" Height="26" Margin="105,0,0,0"
             Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Center" Width="60" FontFamily="Tahoma" FontSize="14"
-            Cursor="Pen" TextChanged="PrizeFromTextBox_TextChanged" PreviewTextInput="DoubleValidationTextBox"
-            MouseDoubleClick="PrizeFromTextBox_MouseDoubleClick"/>
-        <Label x:Name="prizeToLabel" Content="do:" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,73,0"
+            Cursor="Pen" TextChanged="PriceFromTextBox_TextChanged" PreviewTextInput="DoubleValidationTextBox"
+            MouseDoubleClick="PriceFromTextBox_MouseDoubleClick"/>
+        <Label x:Name="priceToLabel" Content="do:" Grid.Column="4" HorizontalAlignment="Right" Margin="0,0,73,0"
             Grid.Row="6" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
-        <TextBox x:Name="prizeToTextBox" Grid.Column="4" HorizontalAlignment="Right" Height="26" Margin="0,0,13,0"
+        <TextBox x:Name="priceToTextBox" Grid.Column="4" HorizontalAlignment="Right" Height="26" Margin="0,0,13,0"
             Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Center" Width="60" FontFamily="Tahoma" FontSize="14"
-            Cursor="Pen" TextChanged="PrizeToTextBox_TextChanged" PreviewTextInput="DoubleValidationTextBox"
-            MouseDoubleClick="PrizeToTextBox_MouseDoubleClick"/>
+            Cursor="Pen" TextChanged="PriceToTextBox_TextChanged" PreviewTextInput="DoubleValidationTextBox"
+            MouseDoubleClick="PriceToTextBox_MouseDoubleClick"/>
 
         <Label x:Name="kilometresFromLabel" Content="Najeto od:" Grid.Column="4" HorizontalAlignment="Left"
             Margin="10,0,0,0" Grid.Row="7" VerticalAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
@@ -176,7 +176,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Cena bez DPH [Kč]" Width="109" Binding="{Binding Prize,
+                <DataGridTextColumn Header="Cena bez DPH [Kč]" Width="109" Binding="{Binding Price,
                                         StringFormat={}{0:N2},
                                         ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}}"
                                     CanUserResize="False" CanUserReorder="False">

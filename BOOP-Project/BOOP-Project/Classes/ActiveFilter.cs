@@ -14,8 +14,8 @@ namespace BOOP_Project.Classes
         public CarCategory? CarCategory { get; set; }
         public CarType? CarType { get; set; }
         public FuelType? FuelType { get; set; }
-        public double? PrizeFrom { get; set; }
-        public double? PrizeTo { get; set; }
+        public double? PriceFrom { get; set; }
+        public double? PriceTo { get; set; }
         public double? KilometresFrom { get; set; }
         public double? KilometresTo { get; set; }
         public int? ModelYearFrom { get; set; }

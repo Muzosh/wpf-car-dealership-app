@@ -14,7 +14,7 @@ namespace BOOP_Project
     {
         // First line in each csv document - header
         private const string CsvHeader = "CarID;Added;LastModified;Brand;Model;CarCategory;" +
-        "CarType;FuelType;TransmissionType;Prize;Kilometres;Power;ModelYear;SeatCount;CarFeatures;CarDescription";
+        "CarType;FuelType;TransmissionType;Price;Kilometres;Power;ModelYear;SeatCount;CarFeatures;CarDescription";
 
         // Dialog for choosing document
         public static void ImportFromCsv(bool addToExistingCars)
@@ -96,7 +96,7 @@ namespace BOOP_Project
                     CarType = (CarType)Enum.Parse(typeof(CarType), carProperties[6], true),
                     FuelType = (FuelType)Enum.Parse(typeof(FuelType), carProperties[7], true),
                     TransmissionType = (TransmissionType)Enum.Parse(typeof(TransmissionType), carProperties[8], true),
-                    Prize = Convert.ToDouble(carProperties[9]),
+                    Price = Convert.ToDouble(carProperties[9]),
                     Kilometres = Convert.ToDouble(carProperties[10]),
                     Power = Convert.ToDouble(carProperties[11]),
                     ModelYear = Convert.ToInt32(carProperties[12]),
@@ -139,7 +139,7 @@ namespace BOOP_Project
                                 car.CarType + ";" +
                                 car.FuelType + ";" +
                                 car.TransmissionType + ";" +
-                                car.Prize + ";" +
+                                car.Price + ";" +
                                 car.Kilometres + ";" +
                                 car.Power + ";" +
                                 car.ModelYear + ";" +

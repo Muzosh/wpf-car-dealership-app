@@ -142,8 +142,8 @@ namespace BOOP_Project
                 (CarCategory?)this.categoryComboBox.SelectedItem,
                 (CarType?)this.typeComboBox.SelectedItem,
                 (FuelType?)this.fuelTypeComboBox.SelectedItem,
-                double.TryParse(this.prizeFromTextBox.Text, out double result1) ? result1 : (double?)null,
-                double.TryParse(this.prizeToTextBox.Text, out double result2) ? result2 : (double?)null,
+                double.TryParse(this.priceFromTextBox.Text, out double result1) ? result1 : (double?)null,
+                double.TryParse(this.priceToTextBox.Text, out double result2) ? result2 : (double?)null,
                 double.TryParse(this.kilometresFromTextBox.Text, out double result3) ? result3 : (double?)null,
                 double.TryParse(this.kilometresToTextBox.Text, out double result4) ? result4 : (double?)null,
                 int.TryParse(this.modelYearFromTextBox.Text, out int result5) ? result5 : (int?)null,
@@ -192,29 +192,29 @@ namespace BOOP_Project
             this.UpdateAndApplyFilters();
         }
 
-        private void PrizeFromTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void PriceFromTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!this.prizeFromTextBox.Text.Contains(" "))
+            if (!this.priceFromTextBox.Text.Contains(" "))
             {
                 this.UpdateAndApplyFilters();
             }
             else
             {
-                this.prizeFromTextBox.Text = this.prizeFromTextBox.Text.Replace(" ", "");
-                this.prizeFromTextBox.SelectionStart = this.prizeFromTextBox.Text.Length;
+                this.priceFromTextBox.Text = this.priceFromTextBox.Text.Replace(" ", "");
+                this.priceFromTextBox.SelectionStart = this.priceFromTextBox.Text.Length;
             }
         }
 
-        private void PrizeToTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void PriceToTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!this.prizeToTextBox.Text.Contains(" "))
+            if (!this.priceToTextBox.Text.Contains(" "))
             {
                 this.UpdateAndApplyFilters();
             }
             else
             {
-                this.prizeToTextBox.Text = this.prizeToTextBox.Text.Replace(" ", "");
-                this.prizeToTextBox.SelectionStart = this.prizeToTextBox.Text.Length;
+                this.priceToTextBox.Text = this.priceToTextBox.Text.Replace(" ", "");
+                this.priceToTextBox.SelectionStart = this.priceToTextBox.Text.Length;
             }
         }
 
@@ -302,14 +302,14 @@ namespace BOOP_Project
             this.modelTextBox.Text = null;
         }
 
-        private void PrizeFromTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void PriceFromTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.prizeFromTextBox.Text = null;
+            this.priceFromTextBox.Text = null;
         }
 
-        private void PrizeToTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void PriceToTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.prizeToTextBox.Text = null;
+            this.priceToTextBox.Text = null;
         }
 
         private void KilometresFromTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)

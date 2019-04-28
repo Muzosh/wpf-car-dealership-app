@@ -23,7 +23,7 @@ namespace BOOP_Project
         public double Kilometres { get; set; }
         public string Model { get; set; }
         public double Power { get; set; }
-        public double Prize { get; set; }
+        public double Price { get; set; }
         public int ModelYear { get; set; }
         public int SeatCount { get; set; }
         public DateTime LastModified { get; set; }

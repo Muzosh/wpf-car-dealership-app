@@ -22,8 +22,8 @@ namespace BOOP_Project
             CarCategory? carCategory,
             CarType? carType,
             FuelType? fuelType,
-            double? prizeFrom,
-            double? prizeTo,
+            double? priceFrom,
+            double? priceTo,
             double? kilometresFrom,
             double? kilometresTo,
             int? modelYearFrom,
@@ -40,8 +40,8 @@ namespace BOOP_Project
             activeFilter.CarCategory = carCategory;
             activeFilter.CarType = carType;
             activeFilter.FuelType = fuelType;
-            activeFilter.PrizeFrom = prizeFrom;
-            activeFilter.PrizeTo = prizeTo;
+            activeFilter.PriceFrom = priceFrom;
+            activeFilter.PriceTo = priceTo;
             activeFilter.KilometresFrom = kilometresFrom;
             activeFilter.KilometresTo = kilometresTo;
             activeFilter.ModelYearFrom = modelYearFrom;
@@ -93,17 +93,17 @@ namespace BOOP_Project
                     .ToList();
             }
 
-            if (activeFilter.PrizeFrom != null)
+            if (activeFilter.PriceFrom != null)
             {
                 filteredCarList = filteredCarList
-                    .Where(x => x.Prize >= activeFilter.PrizeFrom)
+                    .Where(x => x.Price >= activeFilter.PriceFrom)
                     .ToList();
             }
 
-            if (activeFilter.PrizeTo != null)
+            if (activeFilter.PriceTo != null)
             {
                 filteredCarList = filteredCarList
-                    .Where(x => x.Prize <= activeFilter.PrizeTo)
+                    .Where(x => x.Price <= activeFilter.PriceTo)
                     .ToList();
             }
 
@@ -175,7 +175,7 @@ namespace BOOP_Project
                             x.CarType.ToString().ToLower().Contains(searchString.ToLower()) ||
                             x.FuelType.ToString().ToLower().Contains(searchString.ToLower()) ||
                             x.TransmissionType.ToString().ToLower().Contains(searchString.ToLower()) ||
-                            x.Prize.ToString().ToLower().Contains(searchString.ToLower()) ||
+                            x.Price.ToString().ToLower().Contains(searchString.ToLower()) ||
                             x.Kilometres.ToString().ToLower().Contains(searchString.ToLower()) ||
                             x.ModelYear.ToString().ToLower().Contains(searchString.ToLower()) ||
                             (!string.IsNullOrEmpty(x.CarDescription) &&

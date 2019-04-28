@@ -50,7 +50,7 @@ namespace BOOP_Project
             this.brandTextBox.Text = currentCar.Brand;
             this.modelTextBox.Text = currentCar.Model;
             this.fuelTypeComboBox.SelectedItem = currentCar.FuelType;
-            this.prizeTextBox.Text = currentCar.Prize.ToString();
+            this.priceTextBox.Text = currentCar.Price.ToString();
             this.modelYearTextBox.Text = currentCar.ModelYear.ToString();
             this.kilometresTextBox.Text = currentCar.Kilometres.ToString();
             this.typeComboBox.SelectedItem = currentCar.CarType;
@@ -142,10 +142,10 @@ namespace BOOP_Project
                 sb.Append("typ paliva, ");
             }
 
-            // Prize
-            if (double.TryParse(this.prizeTextBox.Text, out double result4))
+            // Price
+            if (double.TryParse(this.priceTextBox.Text, out double result4))
             {
-                currentCar.Prize = result4;
+                currentCar.Price = result4;
             }
             else
             {
@@ -330,9 +330,9 @@ namespace BOOP_Project
             this.fuelTypeComboBox.SelectedIndex = -1;
         }
 
-        private void PrizeTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void PriceTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            this.prizeTextBox.Text = null;
+            this.priceTextBox.Text = null;
         }
 
         private void ModelYearTextBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -377,12 +377,12 @@ namespace BOOP_Project
         #endregion
 
         #region Removing spaces
-        private void PrizeTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void PriceTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (this.prizeTextBox.Text.Contains(" "))
+            if (this.priceTextBox.Text.Contains(" "))
             {
-                this.prizeTextBox.Text = this.prizeTextBox.Text.Replace(" ", "");
-                this.prizeTextBox.SelectionStart = this.prizeTextBox.Text.Length;
+                this.priceTextBox.Text = this.priceTextBox.Text.Replace(" ", "");
+                this.priceTextBox.SelectionStart = this.priceTextBox.Text.Length;
             }
         }
         private void ModelYearTextBox_TextChanged(object sender, TextChangedEventArgs e)
