@@ -31,6 +31,8 @@ namespace BOOP_Project
         }
 
         // Helpers
+
+        // Loading of car data to boxes
         private void RefreshDataSource(Guid carID)
         {
             Car currentCar = CarList.fullCarList.Find(x => x.CarID == carID);
@@ -59,6 +61,7 @@ namespace BOOP_Project
             this.descriptionTextBox.Text = currentCar.CarDescription;
         }
 
+        // Method for saving car 
         private int SaveCar()
         {
             Car currentCar;
@@ -94,6 +97,7 @@ namespace BOOP_Project
             return 1;
         }
 
+        // Check if all boxes are filled with right data type
         private Car ValidateGuiAndSetCarProperties(Car currentCar)
         {
             StringBuilder sb = new StringBuilder();
@@ -228,7 +232,7 @@ namespace BOOP_Project
                 sb.Append("výbava, ");
             }
 
-            // ...
+            // Add time, if modifying is valid
             if (sb.Length == 0)
             {
                 currentCar.LastModified = DateTime.Now;
@@ -247,17 +251,22 @@ namespace BOOP_Project
         }
 
         // Event handlers
+
+        // For writing valide text in textBox of price ... (double)
         private void DoubleValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("((^[0-9]+,[0-9]*$)|^[0-9]+$)");
             e.Handled = !regex.IsMatch(((TextBox)e.Source).Text + e.Text);
         }
+
+        // For writing valide text in textBox of year ... (int)
         private void IntegerValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[0-9]");
             e.Handled = !regex.IsMatch(e.Text);
         }
 
+        // Save button
         private void SaveCarButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.SaveCar() == 1)
@@ -266,11 +275,13 @@ namespace BOOP_Project
             }
         }
 
+        // Cancel button
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        // Delete button
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
             if (passedCarID.HasValue)

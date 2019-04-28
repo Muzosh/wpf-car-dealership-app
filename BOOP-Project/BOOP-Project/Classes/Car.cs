@@ -32,6 +32,7 @@ namespace BOOP_Project
         {
         }
 
+        // Constructor for new car when ID and time have to be generated
         public Car(bool isFromImport)
         {
             if (!isFromImport)

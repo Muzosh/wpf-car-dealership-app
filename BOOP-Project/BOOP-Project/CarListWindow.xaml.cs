@@ -24,6 +24,8 @@ namespace BOOP_Project
         }
 
         // Event handlers
+
+        // Add button - add/edit window is opened
         private void AddCarButton_Click(object sender, RoutedEventArgs e)
         {
             this.OpenCarEditWindow(null);
@@ -31,6 +33,7 @@ namespace BOOP_Project
             this.UpdateAndApplyFilters();
         }
 
+        // Edit button - from data grid must be choose car then press edit button, car items are loaded
         private void EditCarButton_Click(object sender, RoutedEventArgs e)
         {
             Guid carID;
@@ -48,12 +51,14 @@ namespace BOOP_Project
                 return;
             }
 
-            this.OpenCarEditWindow(carID);
+            this.OpenCarEditWindow(carID); // edit window filled with car items
 
             this.carsDataGrid.SelectedItem = null;
             this.UpdateAndApplyFilters();
         }
 
+
+        // Double click on car - edit window is opened
         private void CarsDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Guid carID;
@@ -77,6 +82,7 @@ namespace BOOP_Project
             this.UpdateAndApplyFilters();
         }
 
+        // Import button - import csv to existing database / or existing database is removed
         private void ImportButton_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult msgBoxResult = MessageBox.Show(
@@ -99,17 +105,20 @@ namespace BOOP_Project
             this.UpdateAndApplyFilters();
         }
 
+        // Export button
         private void ExportButton_Click(object sender, RoutedEventArgs e)
         {
             ImportExportHelper.ExportToCsv();
         }
 
+        // For writing valide text in textBox of price ... (double)
         private void DoubleValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("((^[0-9]+,[0-9]*$)|^[0-9]+$)");
             e.Handled = !regex.IsMatch(((TextBox)e.Source).Text + e.Text);
         }
 
+        // For writing valide text in textBox of year ... (int)
         private void IntegerValidationTextBox(object sender, TextCompositionEventArgs e)
         {
             Regex regex = new Regex("[0-9]");
@@ -117,11 +126,14 @@ namespace BOOP_Project
         }
 
         // Helpers
+
+        // DataGrid with appropiate data
         private void RefreshCarsDataGrid()
         {
             this.carsDataGrid.ItemsSource = CarList.filteredCarList;
         }
 
+        // Updating of active filters in textBox and comboBox
         private void UpdateAndApplyFilters()
         {
             CarList.UpdateActiveFilter(
@@ -146,6 +158,7 @@ namespace BOOP_Project
             this.RefreshCarsDataGrid();
         }
 
+        // Open edit window with informatin about car according ID, possible to put also null as a parameter 
         private void OpenCarEditWindow(Guid? carID)
         {
             CarEditWindow carEditWindow = new CarEditWindow(carID);

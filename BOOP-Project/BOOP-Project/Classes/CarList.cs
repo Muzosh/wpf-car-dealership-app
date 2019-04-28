@@ -53,6 +53,7 @@ namespace BOOP_Project
             activeFilter.SearchStrings = searchStrings.Split(',', ' ', ';', '.').ToList();
         }
 
+        // Aplication of filters on fullCarList
         public static void ApplyActiveFilter()
         {
             filteredCarList = fullCarList.Cast<Car>().ToList();

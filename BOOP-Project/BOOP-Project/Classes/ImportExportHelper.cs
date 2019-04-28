@@ -12,9 +12,11 @@ namespace BOOP_Project
 {
     public static class ImportExportHelper
     {
+        // First line in each csv document - header
         private const string CsvHeader = "CarID;Added;LastModified;Brand;Model;CarCategory;" +
         "CarType;FuelType;TransmissionType;Prize;Kilometres;Power;ModelYear;SeatCount;CarFeatures;CarDescription";
 
+        // Dialog for choosing document
         public static void ImportFromCsv(bool addToExistingCars)
         {
             // Configure save file dialog box
@@ -39,7 +41,7 @@ namespace BOOP_Project
                     using (StreamReader sr =
                         new StreamReader(File.Open(ofd.FileName, FileMode.Open), Encoding.UTF8))
                     {
-
+                        // If document does not contain valid header, it can not be imported
                         if (sr.ReadLine() != CsvHeader)
                         {
                             MessageBox.Show(
@@ -78,11 +80,13 @@ namespace BOOP_Project
             }
         }
 
+        // Import cars to list from csv document (string)
         private static void AddCarToFullCarList(string[] carProperties)
         {
             CarList.fullCarList.Add(
                 new Car(true)
                 {
+                    // convert string to appropriate type
                     CarID = new Guid(carProperties[0]),
                     Added = Convert.ToDateTime(carProperties[1]),
                     LastModified = Convert.ToDateTime(carProperties[2]),
@@ -102,6 +106,7 @@ namespace BOOP_Project
                 });
         }
 
+        // Dialog for exporting csv document
         public static void ExportToCsv()
         {
             // Configure save file dialog box
