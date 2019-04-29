@@ -55,7 +55,7 @@
         <ComboBox x:Name="fuelTypeComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
                   Grid.Row="3" FontFamily="Tahoma" Cursor="Hand" FontSize="14" MouseDoubleClick="FuelTypeComboBox_MouseDoubleClick"/>
 
-        <Label x:Name="priceLabel" Content="Cena" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
+        <Label x:Name="priceLabel" Content="Cena [Kč]" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Row="4" HorizontalContentAlignment="Center" 
                VerticalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="priceTextBox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Row="4" 
@@ -85,7 +85,7 @@
         <ComboBox x:Name="typeComboBox" HorizontalAlignment="Left" Margin="160,0,0,0" VerticalAlignment="Center" Width="132" 
                   Grid.Column="1" Grid.Row="1" FontFamily="Tahoma" Cursor="Hand" FontSize="14" MouseDoubleClick="TypeComboBox_MouseDoubleClick"/>
 
-        <Label x:Name="powerLavel" Content="Výkon" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
+        <Label x:Name="powerLavel" Content="Výkon [kW]" HorizontalAlignment="Left" Margin="23,0,0,0" VerticalAlignment="Center" 
                Height="40" Width="90" Grid.Column="1" Grid.Row="2" VerticalContentAlignment="Center" 
                HorizontalContentAlignment="Center" FontFamily="Tahoma" FontSize="14"/>
         <TextBox x:Name="powerTextbox" HorizontalAlignment="Left" Height="23" Margin="160,0,0,0" Grid.Column="1" Grid.Row="2" 

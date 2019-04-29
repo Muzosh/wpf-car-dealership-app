@@ -111,6 +111,34 @@ namespace BOOP_Project
             ImportExportHelper.ExportToCsv();
         }
 
+        // Delete button
+        private void DataGrid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Back || e.Key == Key.Delete)
+            {
+                Car selectedCar;
+                try
+                {
+                    selectedCar = (Car)this.carsDataGrid.SelectedItem;
+                }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show(
+                        "Není vybrána žádná položka",
+                        "Editovat položku",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                    return;
+                }
+
+                CarList.fullCarList.Remove(selectedCar);
+
+                this.carsDataGrid.SelectedIndex = this.carsDataGrid.SelectedIndex + 1;
+                this.carsDataGrid.Focus();
+                this.UpdateAndApplyFilters();
+            }
+        }
+
         // For writing valide text in textBox of price ... (double)
         private void DoubleValidationTextBox(object sender, TextCompositionEventArgs e)
         {
